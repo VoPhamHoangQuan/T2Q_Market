@@ -19,7 +19,7 @@ export const dispatchGetUser = (res) => {
         type: GET_USER,
         payload: {
             user: res.data,
-            // isAdmin: res.data.isAdmin === true ? true : false
-        }
+            isAdmin: res.data.isAdmin === true ? true : false
+        }       
     }
 }

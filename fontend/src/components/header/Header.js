@@ -2,12 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
+// import Admin from '../../components/AdminRoutes'
 
 
 function Header() {
     const auth = useSelector(state => state.auth)
 
-    const { user, isLogged } = auth
+    const { user, isLogged, isAdmin } = auth
     const cart = useSelector(state => state.cart);
     const { cartItems } = cart
 
@@ -42,10 +43,6 @@ function Header() {
         )
     }
 
-    // const transForm = {
-    //     transform: isLogged ? "translateY(-5px)" : 0
-    // }
-
     return (
         <div className="grid-container">
             <header className="row">
@@ -66,6 +63,27 @@ function Header() {
                             ? userLink()
                             : <Link to="/signin"><i className="fas fa-user"></i> Sign in</Link>
                     }
+                    {isLogged && isAdmin && (
+                        <div className="dropdown">
+                            <Link to="#admin">
+                                Admin <i className="fa fa-caret-down"></i>
+                            </Link>
+                            <ul className="dropdown-content">
+                                <li>
+                                    <Link to="/dashboard">Dashboard</Link>
+                                </li>
+                                <li>
+                                    <Link to="/productlist">Products</Link>
+                                </li>
+                                <li>
+                                    <Link to="/orderlist">Orders</Link>
+                                </li>
+                                <li>
+                                    <Link to="/userlist">Users</Link>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
                 </div>
             </header>
         </div>
