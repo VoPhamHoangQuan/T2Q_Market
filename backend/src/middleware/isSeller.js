@@ -1,6 +1,6 @@
 const Users = require('../app/models/users')
 
-export const isSeller = async (req, res, next) => {
+exports.isSeller = async (req, res, next) => {
     try {
         const user = await Users.findOne({ _id: req.user.id })
 
@@ -13,7 +13,7 @@ export const isSeller = async (req, res, next) => {
     }
 }
 
-export const isSellerOrAdmin = async (req, res, next) => {
+exports.isSellerOrAdmin = async (req, res, next) => {
     try {
         const user = await Users.findOne({ _id: req.user.id })
 
