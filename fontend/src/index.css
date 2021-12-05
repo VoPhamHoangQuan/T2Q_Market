@@ -197,7 +197,7 @@ img.large{
 
 /* card */
 .card {
-  border: 0.1rem #dcdcdc solid;
+  border: 0.2rem #dcdcdc solid;
   background-color: #faf8f8;
   border-radius: 0.5rem;
   margin: 1rem;
@@ -274,7 +274,7 @@ img.large{
 
 .form label{
   margin: 1rem 0;
-  display: block;
+  /* display: block; */
 }
 
 /* Dropdown */

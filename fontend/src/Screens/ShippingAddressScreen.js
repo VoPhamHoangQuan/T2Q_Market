@@ -5,24 +5,28 @@ import { saveShippingAddress } from '../redux/actions/cartActions';
 
 export default function ShippingAddressScreen(props) {
 
+    const firstLogin = localStorage.getItem("firstLogin");
+    if (!firstLogin) {
+        props.history.push('/signin')
+    }
     const cart = useSelector(state => state.cart);
-    const {shippingAddress}  = cart;
+    const { shippingAddress } = cart;
     const [fullName, setFullName] = useState(shippingAddress.fullName);
     const [address, setAddress] = useState(shippingAddress.address);
     const [city, setCity] = useState(shippingAddress.city);
     const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
     const [country, setCountry] = useState(shippingAddress.country);
     const dispatch = useDispatch();
-    const submitHandler = (e)=>{
+    const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(saveShippingAddress({fullName, address, city, postalCode, country}));
+        dispatch(saveShippingAddress({ fullName, address, city, postalCode, country }));
         //TODO: Dispatch save shipping address action
         props.history.push('/payment');
     }
 
     return (
         <div>
-            <CheckoutSteps step1></CheckoutSteps>
+            <CheckoutSteps step1 step2></CheckoutSteps>
             <form className='form' onSubmit={submitHandler}>
                 <div>
                     <h1>Shipping Adress</h1>
@@ -79,8 +83,8 @@ export default function ShippingAddressScreen(props) {
                 </div>
 
                 <div>
-                    <label/>
-                    <button className = "primary" type = "submit">
+                    <label />
+                    <button className="primary" type="submit">
                         Continue
                     </button>
                 </div>
