@@ -20,9 +20,10 @@
     "http-errors": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "lowdb": "^1.0.0",
+    "mongoose": "^6.0.11",
     "rand-token": "^1.0.1",
-    "util": "^0.12.3",
-    "mongoose": "^6.0.11"
+    "socket.io": "^4.4.0",
+    "util": "^0.12.3"
   },
   "devDependencies": {
     "eslint": "^7.5.0",

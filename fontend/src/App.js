@@ -24,6 +24,13 @@ import UserEditScreen from './Screens/UserEditScreen'
 // Profile
 import ProfileScreen from './Screens/ProfileScreen';
 
+// Chat box
+import ChatBox from './components/ChatBox';
+import SupportScreen from './Screens/SupportScreen'
+
+// Order 
+import OrderListScreen from './Screens/OrderListScreen'
+
 
 function App() {
 
@@ -81,11 +88,21 @@ function App() {
           <Route path="/activation/:activation_token" component={ActivationEmail} exact />
           <Route path="/productlist" component={isAdmin? ProductListScreen : NotFound} />
 
+          {/* Chat Box */}
+          <Route path="/support" component={isAdmin?SupportScreen : NotFound} exact></Route>
+
+          {/* Order */}
+          <Route path="/orderlist" component={OrderListScreen}></Route>
+
 
 
         </main>
         <footer className="row center">
           All right reverse
+        </footer>
+        <footer className="row center">
+          {auth.user && !isAdmin && <ChatBox userInfo={auth.user} />}
+          <div>All right reserved</div>{' '}
         </footer>
       </div>
     </BrowserRouter>

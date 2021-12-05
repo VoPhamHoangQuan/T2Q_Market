@@ -14,7 +14,7 @@ export default function ProductEditScreen(props) {
     const [price, setPrice] = useState('');
     const [image, setImage] = useState('');
     const [category, setCategory] = useState('');
-    const [countInStock, setCountInStock] = useState('');
+    const [amount, setCountInStock] = useState('');
     const [brand, setBrand] = useState('');
     const [description, setDescription] = useState('');
 
@@ -41,7 +41,7 @@ export default function ProductEditScreen(props) {
             setPrice(product.price);
             setImage(product.image);
             setCategory(product.category);
-            setCountInStock(product.countInStock);
+            setCountInStock(product.amount);
             setBrand(product.brand);
             setDescription(product.description);
         }
@@ -58,7 +58,7 @@ export default function ProductEditScreen(props) {
                 image,
                 category,
                 brand,
-                countInStock,
+                amount,
                 description,
             }, token)
         );
@@ -168,7 +168,7 @@ export default function ProductEditScreen(props) {
                                 id="countInStock"
                                 type="text"
                                 placeholder="Enter countInStock"
-                                value={countInStock}
+                                value={amount}
                                 onChange={(e) => setCountInStock(e.target.value)}
                             ></input>
                         </div>

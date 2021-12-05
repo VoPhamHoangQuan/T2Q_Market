@@ -81,6 +81,9 @@ function Header() {
                                 <li>
                                     <Link to="/userlist">Users</Link>
                                 </li>
+                                <li>
+                                    <Link to="/support">Support</Link>
+                                </li>
                             </ul>
                         </div>
                     )}
