@@ -30,6 +30,8 @@ import SupportScreen from './Screens/SupportScreen'
 
 // Order 
 import OrderListScreen from './Screens/OrderListScreen'
+import PaymentMethodScreen from './Screens/PaymentMethodScreen';
+import PlaceOrderScreen from './Screens/PlaceOrderScreen';
 
 
 function App() {
@@ -93,6 +95,8 @@ function App() {
 
           {/* Order */}
           <Route path="/orderlist" component={OrderListScreen}></Route>
+          <Route path="/payment" component={PaymentMethodScreen}></Route>
+          <Route path="/placeorder" component={PlaceOrderScreen}></Route>
 
 
 
