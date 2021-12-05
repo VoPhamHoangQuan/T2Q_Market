@@ -9,7 +9,7 @@ function route(app) {
     app.use('/api/users', userRouter)
     app.use('api/admin', adminRouter)
     app.use('/api/products', productRouter)
-    app.use('/order', orderRouter)
+    app.use('/api/orders', orderRouter)
     app.use('/api/uploads', uploadRouter)
     app.use('/', authRouter)
 }

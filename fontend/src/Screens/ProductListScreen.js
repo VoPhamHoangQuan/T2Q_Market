@@ -1,21 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  createProduct,
-  deleteProduct,
-  listProducts,
+    createProduct,
+    deleteProduct,
+    listProducts,
 } from '../redux/actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import {
-  PRODUCT_CREATE_RESET,
-  PRODUCT_DELETE_RESET,
+    PRODUCT_CREATE_RESET,
+    PRODUCT_DELETE_RESET,
 } from '../redux/constants/productConstants';
 
 export default function ProductListScreen(props) {
     const productList = useSelector((state) => state.productList);//get list product from redux store
     const { loading, error, products } = productList;//get info list of product
     const getToken = useSelector((state) => state.token);
+    const [page, setPage] = useState(1)
 
     //create
     const productCreate = useSelector((state) => state.productCreate);
@@ -43,8 +44,8 @@ export default function ProductListScreen(props) {
         if (successDelete) {//delete success
             dispatch({ type: PRODUCT_DELETE_RESET });
         }
-        dispatch(listProducts());
-    }, [createdProduct, dispatch, props.history, successCreate, successDelete]);
+        dispatch(listProducts(page));
+    }, [createdProduct, dispatch, props.history, successCreate, successDelete, page]);
 
     const deleteHandler = (product) => {
         if (window.confirm('Are you sure to delete?')) {
@@ -54,6 +55,17 @@ export default function ProductListScreen(props) {
     const createHandler = () => {
         dispatch(createProduct(getToken));//implement create product action
     };
+
+    const prevPage = () => {
+        const pg = page - 1;
+        dispatch(listProducts(pg))
+        setPage(pg)
+    }
+    const nextPage = () => {
+        const pg = page + 1;
+        dispatch(listProducts(pg))
+        setPage(pg)
+    }
     return (
         <div>
             <div className="row">
@@ -102,8 +114,21 @@ export default function ProductListScreen(props) {
                             </tr>
                         ))}
                     </tbody>
+                    <button
+                        className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l"
+                        onClick={prevPage}
+                    >
+                        Prev
+                    </button>
+                    <button
+                        className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r"
+                        onClick={nextPage}
+                    >
+                        Next
+                    </button>
                 </table>
             )}
+
         </div>
     );
 }
