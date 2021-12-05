@@ -5,7 +5,7 @@ const isAdmin = require('../middleware/isAdmin')
 
 const userController = require('../app/controllers/userController')
 
-router.get('/:id', isAuth, userController.getUser)
+router.get('/info', isAuth, userController.getUser)
 router.get('/ad/:id', isAuth, isAdmin, userController.getUserInfo)
 router.put('/profile', isAuth, userController.updateProfile)
 router.put('/:id', isAuth, isAdmin, userController.updateUser)
