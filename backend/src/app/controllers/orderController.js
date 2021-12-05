@@ -3,7 +3,13 @@ const orderModel = require('../models/order')
 class OrderController {
     //  admin get all orders
     async getAll(req, res, next) {
-        const orders = await orderModel.find({}).populate('user', 'name')
+        const seller = req.query.seller || '';
+        const sellerFilter = seller ? { seller } : {};
+
+        const orders = await Order.find({ ...sellerFilter }).populate(
+            'user',
+            'name'
+        );
         res.send(orders)
     }
 
@@ -19,7 +25,8 @@ class OrderController {
         if (req.body.orderItems.length === 0) {
             res.status(400).send({ message: 'Cart is empty' });
         } else {
-            const order = new Order({
+            const order = new orderModel({
+                seller: req.body.orderItems[0].seller,
                 orderItems: req.body.orderItems,
                 shippingAddress: req.body.shippingAddress,
                 paymentMethod: req.body.paymentMethod,
