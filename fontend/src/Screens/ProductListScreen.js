@@ -16,6 +16,8 @@ export default function ProductListScreen(props) {
     const productList = useSelector((state) => state.productList);//get list product from redux store
     const { loading, error, products } = productList;//get info list of product
     const getToken = useSelector((state) => state.token);
+    const sellerMode = props.match.path.indexOf('/seller') >= 0;
+    const auth = useSelector(state => state.auth)
     const [page, setPage] = useState(1)
 
     //create
@@ -44,8 +46,8 @@ export default function ProductListScreen(props) {
         if (successDelete) {//delete success
             dispatch({ type: PRODUCT_DELETE_RESET });
         }
-        dispatch(listProducts(page));
-    }, [createdProduct, dispatch, props.history, successCreate, successDelete, page]);
+        dispatch(listProducts({ seller: sellerMode ? auth.user._id : '' }));
+    }, [createdProduct, dispatch, props.history, successCreate, successDelete, sellerMode, auth.user._id]);
 
     const deleteHandler = (product) => {
         if (window.confirm('Are you sure to delete?')) {

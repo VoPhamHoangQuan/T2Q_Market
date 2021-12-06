@@ -20,14 +20,14 @@ import {
   PRODUCT_REVIEW_CREATE_FAIL,
 } from "../constants/productConstants";
 
-export const listProducts = (page) => async (dispatch) => {
+export const listProducts = ({ seller = '' }) => async (dispatch) => {
   // return function
   dispatch({
     type: PRODUCT_LIST_REQUEST,
   });
   try {
     //fetch data from backend
-    const { data } = await Axios.get(`/api/products?page=${page}`); //sending ajax to get list products, dùng axios
+    const { data } = await Axios.get(`/api/products?seller=${seller}`); //sending ajax to get list products, dùng axios
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data }); //success, return data, change state of redux, update screen
   } catch (error) {
     dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message }); //false, return message.

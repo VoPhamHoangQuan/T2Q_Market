@@ -5,7 +5,7 @@ import { productCreateReducer, productDeleteReducer, productDetailReducer, produ
 import { authReducer } from './redux/reducers/authReducer';
 import { tokenReducer } from './redux/reducers/tokenReducer';
 import { Provider } from 'react-redux'
-import { userDeleteReducer, userDetailsReducer, userListReducer, userUpdateProfileReducer, userUpdateReducer } from "./redux/reducers/userReducers";
+import { userDeleteReducer, userDetailsReducer, userListReducer, userUpdateProfileReducer, userUpdateReducer, userTopSellerListReducer, } from "./redux/reducers/userReducers";
 import {
     orderCreateReducer,
     orderDeleteReducer,
@@ -33,6 +33,7 @@ const reducer = combineReducers({
     userList: userListReducer,
     userDelete: userDeleteReducer,
     userUpdate: userUpdateReducer,
+    userTopSellersList: userTopSellerListReducer,
     // reviews
     productReviewCreate: productReviewCreateReducer,
     // order

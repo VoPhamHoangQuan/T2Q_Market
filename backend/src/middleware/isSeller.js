@@ -1,6 +1,6 @@
 const Users = require('../app/models/users')
 
-exports.isSeller = async (req, res, next) => {
+const isSeller = async (req, res, next) => {
     try {
         const user = await Users.findOne({ _id: req.user.id })
 
@@ -13,16 +13,5 @@ exports.isSeller = async (req, res, next) => {
     }
 }
 
-exports.isSellerOrAdmin = async (req, res, next) => {
-    try {
-        const user = await Users.findOne({ _id: req.user.id })
+module.exports = isSeller
 
-        if (user.isSeller || user.isAdmin) {
-            next()
-        } else {
-            res.status(401).send({ message: 'Invalid Admin/Seller Token' });
-        }
-    } catch (err) {
-        return res.status(500).json({ msg: err.message })
-    }
-}
