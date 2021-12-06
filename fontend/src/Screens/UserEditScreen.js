@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { detailUser, updateUser } from '../redux/actions/userActions';
+import { detailsUser, updateUser } from '../redux/actions/userActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { USER_UPDATE_RESET } from '../redux/constants/userConstants';
@@ -32,7 +32,7 @@ export default function UserEditScreen(props) {
             props.history.push('/userlist');
         }
         if (!user) {
-            dispatch(detailUser(userId, token));
+            dispatch(detailsUser(userId, token));
         } else {
             setName(user.name);
             setEmail(user.email);

@@ -389,4 +389,9 @@ img.large{
   background-color: #f02020;
 }
 
+/* Carousel */
+.carousel .slide img {
+  max-width: 30rem;
+}
+
 @import url("./Screens/auth.css");

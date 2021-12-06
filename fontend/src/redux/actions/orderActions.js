@@ -99,10 +99,10 @@ export const listOrderMine = (token) => async (dispatch, getState) => {
     }
 };
 //admin get all order
-export const listOrders = (token) => async (dispatch, getState) => {
+export const listOrders = ({ seller = '' }, token) => async (dispatch, getState) => {
     dispatch({ type: ORDER_LIST_REQUEST });
     try {
-        const { data } = await Axios.get('/api/orders', {
+        const { data } = await Axios.get(`/api/orders?seller=${seller}`, {
             headers: { Authorization: token },
         });
         console.log(data);

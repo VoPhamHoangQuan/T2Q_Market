@@ -6,10 +6,12 @@ import MessageBox from '../components/MessageBox';
 import { ORDER_DELETE_RESET } from '../redux/constants/orderConstants';
 
 export default function OrderListScreen(props) {
+    const sellerMode = props.match.path.indexOf('/seller') >= 0;
     const orderList = useSelector((state) => state.orderList);
     const { loading, error, orders } = orderList;
     const orderDelete = useSelector((state) => state.orderDelete);
     const token = useSelector( state => state.token)
+    const auth = useSelector( state => state.auth)
     const {
         loading: loadingDelete,
         error: errorDelete,
@@ -18,8 +20,8 @@ export default function OrderListScreen(props) {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch({ type: ORDER_DELETE_RESET });
-        dispatch(listOrders(token));
-    }, [dispatch, successDelete, token]);
+        dispatch(listOrders({ seller: sellerMode ? auth.user._id : '' }, token));
+    }, [dispatch, successDelete, token, sellerMode, auth.user._id]);
     const deleteHandler = (order) => {
         if (window.confirm('Are you sure to delete?')) {
             dispatch(deleteOrder(order._id, token));//del by id

@@ -63,6 +63,21 @@ function Header() {
                             ? userLink()
                             : <Link to="/signin"><i className="fas fa-user"></i> Sign in</Link>
                     }
+                    {isLogged && auth.user.isSeller && (
+                        <div className="dropdown">
+                            <Link to="#admin">
+                                Seller <i className="fa fa-caret-down"></i>
+                            </Link>
+                            <ul className="dropdown-content">
+                                <li>
+                                    <Link to="/productlist/seller">Products</Link>
+                                </li>
+                                <li>
+                                    <Link to="/orderlist/seller">Orders</Link>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
                     {isLogged && isAdmin && (
                         <div className="dropdown">
                             <Link to="#admin">

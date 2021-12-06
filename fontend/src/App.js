@@ -32,6 +32,8 @@ import SupportScreen from './Screens/SupportScreen'
 import OrderListScreen from './Screens/OrderListScreen'
 import PaymentMethodScreen from './Screens/PaymentMethodScreen';
 import PlaceOrderScreen from './Screens/PlaceOrderScreen';
+// Seller
+import SellerScreen from './Screens/SellerScreen';
 
 
 function App() {
@@ -78,7 +80,7 @@ function App() {
 
           {/* Product */}
           <Route path="/product/:id" component={ProductScreen} exact></Route>
-          <Route path="/product/:id/edit" component={isAdmin? ProductEditScreen: NotFound} exact></Route>
+          <Route path="/product/:id/edit" component={ProductEditScreen} exact></Route>
           <Route path="/cart/:id?" component={CartScreen}></Route>
           <Route path="/shipping" component={ShippingAddressScreen}></Route>
 
@@ -88,15 +90,20 @@ function App() {
           <Route path="/forgot_password" component={ForgotPass} exact />
           <Route path="/reset/:token" component={ResetPass} exact />
           <Route path="/activation/:activation_token" component={ActivationEmail} exact />
-          <Route path="/productlist" component={isAdmin? ProductListScreen : NotFound} />
+          <Route path="/productlist" component={ProductListScreen} exact/>
 
           {/* Chat Box */}
           <Route path="/support" component={isAdmin?SupportScreen : NotFound} exact></Route>
 
           {/* Order */}
-          <Route path="/orderlist" component={OrderListScreen}></Route>
+          <Route path="/orderlist" component={OrderListScreen} exact></Route>
           <Route path="/payment" component={PaymentMethodScreen}></Route>
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
+
+          {/* Seller */}
+          <Route path="/seller/:id" component={SellerScreen} exact></Route>
+          <Route path="/productlist/seller" component={ProductListScreen} exact></Route>
+          <Route  path="/orderlist/seller" component={OrderListScreen} exact></Route>
 
 
 

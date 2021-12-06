@@ -10,49 +10,66 @@ class ProductController {
     }
 
     // GET product
+    // async getAllProducts(req, res, next) {
+    //     const seller = req.query.seller || '';
+    //     const sellerFilter = seller ? { seller } : {};
+    //     const products = await ProductModel.find({ ...sellerFilter });
+    //     const totalCount = products.length
+    //     // console.log(totalCount);
+    //     var page = req.query.page
+    //     if (page) {
+    //         // get page 
+    //         page = parseInt(page)
+    //         if (page < 1) {
+    //             page = 1
+    //         } if (page > Math.ceil(totalCount / PAGE_SIZE)) {
+    //             page = Math.ceil(totalCount / PAGE_SIZE)
+    //             console.log(page)
+    //         }
+    //         var skip = (page - 1) * PAGE_SIZE
+    //         await ProductModel.find({ ...sellerFilter })
+    //             .skip(skip)
+    //             .limit(PAGE_SIZE)
+    //             .then(data => res.json(data))
+    //             .catch(next)
+    //     } else {
+    //         // get All Product
+    //         await ProductModel.find({ ...sellerFilter })
+    //             .then(data => res.json(data))
+    //             .catch(next)
+    //     }
+
+    // }
+
     async getAllProducts(req, res, next) {
         const seller = req.query.seller || '';
         const sellerFilter = seller ? { seller } : {};
-        const products = await ProductModel.find({ ...sellerFilter });
-        const totalCount = products.length
-        // console.log(totalCount);
-        var page = req.query.page
-        if (page) {
-            // get page 
-            page = parseInt(page)
-            if (page < 1) {
-                page = 1
-            } if (page > Math.ceil(totalCount / PAGE_SIZE)) {
-                page = Math.ceil(totalCount / PAGE_SIZE)
-                console.log(page)
-            }
-            var skip = (page - 1) * PAGE_SIZE
-            await ProductModel.find({ ...sellerFilter })
-                .skip(skip)
-                .limit(PAGE_SIZE)
-                .then(data => res.json(data))
-                .catch(next)
-        } else {
-            // get All Product
-            await ProductModel.find({ ...sellerFilter })
-                .then(data => res.json(data))
-                .catch(next)
-        }
-
+        await ProductModel.find({ ...sellerFilter }).populate(
+            'seller',
+            'seller.name seller.logo'
+        )
+            .then(data => res.json(data))
+            .catch(next)
     }
+
 
 
     // GET product/:id
     async getProduct(req, res, next) {
-        await ProductModel.findById(req.params.id)
-            .then(data => res.json(data))
+        await ProductModel.findById(req.params.id).populate(
+            'seller',
+            'seller.name seller.logo seller.rating seller.numReviews'
+        )
+            .then(data => res.send(data))
             .catch(next)
     }
 
     // POST product 
     async createProduct(req, res, next) {
+        console.log(req.user.id)
         const product = new ProductModel({
             name: 'sample name' + Date.now(),
+            seller: req.user.id,
             image: '/images/p1.jpg',
             price: 0,
             category: 'sample category',
