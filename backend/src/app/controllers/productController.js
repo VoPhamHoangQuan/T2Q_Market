@@ -66,7 +66,7 @@ class ProductController {
             'seller',
             'seller.name seller.logo seller.rating seller.numReviews'
         )
-            .then(data => res.json(data))
+            .then(data => res.send(data))
             .catch(next)
     }
 

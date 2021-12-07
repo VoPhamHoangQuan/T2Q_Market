@@ -43,6 +43,8 @@ import DashboardScreen from './Screens/DashboardScreen';
 import SellerScreen from './Screens/SellerScreen';
 import SearchScreen from './Screens/SearchScreen';
 import MapScreen from './Screens/MapScreen';
+// Seller
+import OrderScreen from './Screens/OrderScreen';
 
 
 function App() {
@@ -254,6 +256,7 @@ function App() {
 
           {/* Order */}
           <Route path="/orderlist" component={OrderListScreen} exact></Route>
+          <Route path="/order/:id" component={OrderScreen} ></Route>
           <Route path="/payment" component={PaymentMethodScreen}></Route>
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
 

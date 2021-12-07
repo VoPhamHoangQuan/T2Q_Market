@@ -46,7 +46,7 @@ export const orderCreateReducer = (state = {}, action) => {
 };
 //get detail order of user.
 export const orderDetailsReducer = (
-  state = { loading: true/*, order: {} */ },
+  state = { loading: true},
   action
 ) => {
   switch (action.type) {

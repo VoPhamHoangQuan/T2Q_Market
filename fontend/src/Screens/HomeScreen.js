@@ -13,6 +13,17 @@ export default function HomeScreen() {
     const dispatch = useDispatch();
     const productList = useSelector(state => state.productList);
     const { loading, error, products } = productList;
+    // const [page, setPage] = useState(1)
+    // const prevPage = () => {
+    //     const pg = page - 1;
+    //     dispatch(listProducts({}))
+    //     setPage(pg)
+    // }
+    // const nextPage = () => {
+    //     const pg = page + 1;
+    //     dispatch(listProducts(pg))
+    //     setPage(pg)
+    // }
 
     const userTopSellersList = useSelector((state) => state.userTopSellersList);
     const {
@@ -65,26 +76,6 @@ export default function HomeScreen() {
 
 
                         )}
-            {/* <div className="row center pagination">
-                {auth.user.isAdmin && [...Array(pages).keys()].map((x) => (
-                    <Link
-                        className={x + 1 === page ? 'active' : ''}
-                        key={x + 1}
-                        to={`/productlist/pageNumber/${x + 1}`}
-                    >
-                        {x + 1}
-                    </Link>
-                ))}
-                {auth.user.isSeller && [...Array(pages).keys()].map((x) => (
-                    <Link
-                        className={x + 1 === page ? 'active' : ''}
-                        key={x + 1}
-                        to={`/productlist/seller/pageNumber/${x + 1}`}
-                    >
-                        {x + 1}
-                    </Link>
-                ))}
-            </div> */}
         </div>
     )
 }

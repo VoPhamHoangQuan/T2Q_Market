@@ -25,7 +25,7 @@ const data = {
             origin: 'origin 01',
             image: '/image/product01.jpg',
             rating:5,
-            numReview: 12,
+            numReviews: 12,
             discount: null,
             IsDelete: null
 
@@ -40,7 +40,7 @@ const data = {
             origin: 'origin 02',
             image: '/image/product01.jpg',
             rating:4,
-            numReview: 11,
+            numReviews: 11,
             discount: null,
             IsDelete: null
 
@@ -55,7 +55,7 @@ const data = {
             origin: 'origin 01',
             image: '/image/product01.jpg',
             rating:3,
-            numReview: 10,
+            numReviews: 10,
             discount: null,
             IsDelete: null
 
@@ -70,7 +70,7 @@ const data = {
             origin: 'origin 01',
             image: '/image/product01.jpg',
             rating:1,
-            numReview: 1,
+            numReviews: 1,
             discount: null,
             IsDelete: null
 
@@ -85,7 +85,7 @@ const data = {
             origin: 'origin 01',
             image: '/image/product01.jpg',
             rating:2,
-            numReview: 1,
+            numReviews: 1,
             discount: null,
             IsDelete: null
 
@@ -100,7 +100,7 @@ const data = {
             origin: 'origin 01',
             image: '/image/product01.jpg',
             rating:3,
-            numReview: 5,
+            numReviews: 5,
             discount: null,
             IsDelete: null
 

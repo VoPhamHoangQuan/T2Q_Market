@@ -30,7 +30,7 @@ class OrderController {
             res.status(400).send({ message: 'Cart is empty' });
         } else {
             const order = new orderModel({
-                seller: req.body.orderItems[0].seller,
+                seller: req.body.orderItems[0].seller._id,
                 orderItems: req.body.orderItems,
                 shippingAddress: req.body.shippingAddress,
                 paymentMethod: req.body.paymentMethod,
