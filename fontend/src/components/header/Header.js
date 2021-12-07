@@ -2,12 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
+// import Admin from '../../components/AdminRoutes'
 
 
 function Header() {
     const auth = useSelector(state => state.auth)
 
-    const { user, isLogged } = auth
+    const { user, isLogged, isAdmin } = auth
     const cart = useSelector(state => state.cart);
     const { cartItems } = cart
 
@@ -16,7 +17,6 @@ function Header() {
             await axios.get('/logout')
             localStorage.removeItem('firstLogin')
             localStorage.removeItem('cartItems')
-            localStorage.removeItem('shippingAddress')
             window.location.href = "/";
         } catch (err) {
             window.location.href = "/";
@@ -43,10 +43,6 @@ function Header() {
         )
     }
 
-    // const transForm = {
-    //     transform: isLogged ? "translateY(-5px)" : 0
-    // }
-
     return (
         <div className="grid-container">
             <header className="row">
@@ -67,6 +63,45 @@ function Header() {
                             ? userLink()
                             : <Link to="/signin"><i className="fas fa-user"></i> Sign in</Link>
                     }
+                    {isLogged && auth.user.isSeller && (
+                        <div className="dropdown">
+                            <Link to="#admin">
+                                Seller <i className="fa fa-caret-down"></i>
+                            </Link>
+                            <ul className="dropdown-content">
+                                <li>
+                                    <Link to="/productlist/seller">Products</Link>
+                                </li>
+                                <li>
+                                    <Link to="/orderlist/seller">Orders</Link>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
+                    {isLogged && isAdmin && (
+                        <div className="dropdown">
+                            <Link to="#admin">
+                                Admin <i className="fa fa-caret-down"></i>
+                            </Link>
+                            <ul className="dropdown-content">
+                                <li>
+                                    <Link to="/dashboard">Dashboard</Link>
+                                </li>
+                                <li>
+                                    <Link to="/productlist">Products</Link>
+                                </li>
+                                <li>
+                                    <Link to="/orderlist">Orders</Link>
+                                </li>
+                                <li>
+                                    <Link to="/userlist">Users</Link>
+                                </li>
+                                <li>
+                                    <Link to="/support">Support</Link>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
                 </div>
             </header>
         </div>

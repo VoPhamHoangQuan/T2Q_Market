@@ -17,7 +17,7 @@ export const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 user: action.payload.user,
-                // isAdmin: action.payload.user.isAdmin,
+                isAdmin: action.payload.user.isAdmin,
             }
         default:
             return state

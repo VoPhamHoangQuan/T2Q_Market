@@ -8,7 +8,7 @@ export const dispatchLogin = () => {
 }
 
 export const fetchUser = async (token) => {
-    const res = await axios.get('/api/users/infor', {
+    const res = await axios.get('/api/users/info', {
         headers: {Authorization: token}
     })
     return res
@@ -19,7 +19,7 @@ export const dispatchGetUser = (res) => {
         type: GET_USER,
         payload: {
             user: res.data,
-            // isAdmin: res.data.isAdmin === true ? true : false
-        }
+            isAdmin: res.data.isAdmin === true ? true : false
+        }       
     }
 }
