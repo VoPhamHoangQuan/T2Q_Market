@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     createProduct,
@@ -14,11 +15,11 @@ import {
 
 export default function ProductListScreen(props) {
     const productList = useSelector((state) => state.productList);//get list product from redux store
-    const { loading, error, products } = productList;//get info list of product
+    const { loading, error, products, page, pages } = productList;
     const getToken = useSelector((state) => state.token);
     const sellerMode = props.match.path.indexOf('/seller') >= 0;
     const auth = useSelector(state => state.auth)
-    const [page, setPage] = useState(1)
+    const { pageNumber = 1 } = useParams();
 
     //create
     const productCreate = useSelector((state) => state.productCreate);
@@ -44,10 +45,17 @@ export default function ProductListScreen(props) {
             props.history.push(`/product/${createdProduct._id}/edit`);//redirect user to edit screen
         }
         if (successDelete) {//delete success
+            if (auth.user.isSeller === false) {
+                props.history.push('/productlist');//push new info to list product
+            } else {
+                props.history.push(`/productlist/seller`);//push new info to list product
+            }
             dispatch({ type: PRODUCT_DELETE_RESET });
         }
-        dispatch(listProducts({ seller: sellerMode ? auth.user._id : '' }));
-    }, [createdProduct, dispatch, props.history, successCreate, successDelete, sellerMode, auth.user._id]);
+        dispatch(
+            listProducts({ seller: sellerMode ? auth.user._id : '', pageNumber })
+        );
+    }, [createdProduct, dispatch, props.history, successCreate, successDelete, sellerMode, auth.user._id, auth.user.isSeller, pageNumber,]);
 
     const deleteHandler = (product) => {
         if (window.confirm('Are you sure to delete?')) {
@@ -57,24 +65,15 @@ export default function ProductListScreen(props) {
     const createHandler = () => {
         dispatch(createProduct(getToken));//implement create product action
     };
-
-    const prevPage = () => {
-        const pg = page - 1;
-        dispatch(listProducts(pg))
-        setPage(pg)
-    }
-    const nextPage = () => {
-        const pg = page + 1;
-        dispatch(listProducts(pg))
-        setPage(pg)
-    }
     return (
         <div>
             <div className="row">
                 <h1>Products</h1>
-                <button type="button" className="primary" onClick={createHandler}>
-                    Create New Product
-                </button>
+                {auth.user.isSeller && (
+                    <button type="button" className="primary" onClick={createHandler}>
+                        Create New Product
+                    </button>
+                )}
             </div>
             {loadingDelete && <LoadingBox></LoadingBox>}
             {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
@@ -86,49 +85,69 @@ export default function ProductListScreen(props) {
             ) : error ? (
                 <MessageBox variant="danger">{error}</MessageBox>
             ) : (
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>NAME</th>
-                            <th>PRICE</th>
-                            <th>CATEGORY</th>
-                            <th>BRAND</th>
-                            <th>ACTIONS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products.map((product) => (
-                            <tr key={product._id}>
-                                <td>{product._id}</td>
-                                <td>{product.name}</td>
-                                <td>{product.price}</td>
-                                <td>{product.category}</td>
-                                <td>{product.brand}</td>
-                                <td>
-                                    <button type="button" className="small" onClick={() => props.history.push(`/product/${product._id}/edit`)}>
-                                        Edit
-                                    </button>
-                                    <button type="button" className="small" onClick={() => deleteHandler(product)}>
-                                        Delete
-                                    </button>
-                                </td>
+                <>
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NAME</th>
+                                <th>PRICE</th>
+                                <th>CATEGORY</th>
+                                <th>BRAND</th>
+                                <th>ACTIONS</th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            {products.map((product) => (
+                                <tr key={product._id}>
+                                    <td>{product._id}</td>
+                                    <td>{product.name}</td>
+                                    <td>{product.price}</td>
+                                    <td>{product.category}</td>
+                                    <td>{product.brand}</td>
+                                    <td>
+                                        <button
+                                            type="button"
+                                            className="small"
+                                            onClick={() =>
+                                                props.history.push(`/product/${product._id}/edit`)
+                                            }
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            type="button"
+                                            className="small"
+                                            onClick={() => deleteHandler(product)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    <div className="row center pagination">
+                        {auth.user.isAdmin && [...Array(pages).keys()].map((x) => (
+                            <Link
+                                className={x + 1 === page ? 'active' : ''}
+                                key={x + 1}
+                                to={`/productlist/pageNumber/${x + 1}`}
+                            >
+                                {x + 1}
+                            </Link>
                         ))}
-                    </tbody>
-                    <button
-                        className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l"
-                        onClick={prevPage}
-                    >
-                        Prev
-                    </button>
-                    <button
-                        className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r"
-                        onClick={nextPage}
-                    >
-                        Next
-                    </button>
-                </table>
+                        {auth.user.isSeller && [...Array(pages).keys()].map((x) => (
+                            <Link
+                                className={x + 1 === page ? 'active' : ''}
+                                key={x + 1}
+                                to={`/productlist/seller/pageNumber/${x + 1}`}
+                            >
+                                {x + 1}
+                            </Link>
+                        ))}
+                    </div>
+                </>
             )}
 
         </div>

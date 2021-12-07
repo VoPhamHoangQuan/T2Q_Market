@@ -8,6 +8,7 @@ import { PRODUCT_UPDATE_RESET } from '../redux/constants/productConstants';
 
 export default function ProductEditScreen(props) {
     const token = useSelector(state => state.token)
+    const auth = useSelector(state => state.auth)
 
     const productId = props.match.params.id;//get id from urls
     const [name, setName] = useState('');//hook for product info
@@ -31,7 +32,11 @@ export default function ProductEditScreen(props) {
     const dispatch = useDispatch();
     useEffect(() => {
         if (successUpdate) {//update success reset info
-            props.history.push('/productlist');//push new info to list product
+            if (auth.user.isSeller === false) {
+                props.history.push('/productlist');//push new info to list product
+            } else {
+                props.history.push(`/productlist/seller`);//push new info to list product
+            }
         }
         if (!product || product._id !== productId || successUpdate) {//
             dispatch({ type: PRODUCT_UPDATE_RESET });//if update success reset info
@@ -45,7 +50,7 @@ export default function ProductEditScreen(props) {
             setBrand(product.brand);
             setDescription(product.description);
         }
-    }, [product, dispatch, productId, successUpdate, props.history]);
+    }, [product, dispatch, productId, successUpdate, props.history, auth.user.isSeller]);
 
     const submitHandler = (e) => {
         e.preventDefault();

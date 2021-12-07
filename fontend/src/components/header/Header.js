@@ -1,16 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios'
-// import Admin from '../../components/AdminRoutes'
+import SearchBox from '../SearchBox';
+import { Route } from 'react-router-dom';
+import { listProductCategories } from '../../redux/actions/productActions';
+import LoadingBox from '../LoadingBox';
+import MessageBox from '../MessageBox';
+
 
 
 function Header() {
+    const dispatch = useDispatch()
     const auth = useSelector(state => state.auth)
-
+    const productCategoryList = useSelector((state) => state.productCategoryList);
+    const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
     const { user, isLogged, isAdmin } = auth
     const cart = useSelector(state => state.cart);
     const { cartItems } = cart
+
+    const {
+        loading: loadingCategories,
+        error: errorCategories,
+        categories,
+    } = productCategoryList;
+
+    useEffect(() => {
+        dispatch(listProductCategories());
+    }, [dispatch]);
 
     const handleLogout = async () => {
         try {
@@ -26,10 +43,8 @@ function Header() {
     const userLink = () => {
         return (
             <React.Fragment>
-                <div>
-                    <img className="superSmall image-profile" src={user.avatar} alt={user.name} />
-                </div>
                 <div className="dropdown">
+                    <img className="superSmall image-profile" src={user.avatar} alt={user.name} />
                     <Link to="#">
                         {user.name}
                         <i className="fas fa-angle-down"></i>
@@ -47,7 +62,21 @@ function Header() {
         <div className="grid-container">
             <header className="row">
                 <div>
+                    <button
+                        type="button"
+                        className="open-sidebar"
+                        onClick={() => setSidebarIsOpen(true)}
+                    >
+                        <i className="fa fa-bars"></i>
+                    </button>
                     <Link className="brand" to="/"> T2Q Market </Link>
+                </div>
+                <div>
+                    <Route
+                        render={({ history }) => (
+                            <SearchBox history={history}></SearchBox>
+                        )}
+                    ></Route>
                 </div>
                 <div className="header-nav">
                     <Link to="/cart">
@@ -104,6 +133,36 @@ function Header() {
                     )}
                 </div>
             </header>
+            <aside className={sidebarIsOpen ? 'open' : ''}>
+                <ul className="categories">
+                    <li>
+                        <strong>Categories</strong>
+                        <button
+                            onClick={() => setSidebarIsOpen(false)}
+                            className="close-sidebar"
+                            type="button"
+                        >
+                            <i className="fa fa-close"></i>
+                        </button>
+                    </li>
+                    {loadingCategories ? (
+                        <LoadingBox></LoadingBox>
+                    ) : errorCategories ? (
+                        <MessageBox variant="danger">{errorCategories}</MessageBox>
+                    ) : (
+                        categories.map((c) => (
+                            <li key={c}>
+                                <Link
+                                    to={`/search/category/${c}`}
+                                    onClick={() => setSidebarIsOpen(false)}
+                                >
+                                    {c}
+                                </Link>
+                            </li>
+                        ))
+                    )}
+                </ul>
+            </aside>
         </div>
     )
 }

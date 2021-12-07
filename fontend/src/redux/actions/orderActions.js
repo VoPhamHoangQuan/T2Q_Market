@@ -22,6 +22,8 @@ import {
     ORDER_PAY_FAIL,
     ORDER_PAY_REQUEST,
     ORDER_PAY_SUCCESS,
+    ORDER_SUMMARY_REQUEST,
+    ORDER_SUMMARY_SUCCESS,
 } from '../constants/orderConstants';
 
 //action to create new order in backend
@@ -150,3 +152,22 @@ export const deliverOrder = (orderId, token) => async (dispatch, getState) => {
         dispatch({ type: ORDER_DELIVER_FAIL, payload: message });
     }
 };
+
+// Dashboard
+export const summaryOrder = (token) => async (dispatch, getState) => {
+    dispatch({ type: ORDER_SUMMARY_REQUEST });
+    try {
+      const { data } = await Axios.get('/api/orders/summary', {
+        headers: { Authorization: token},
+      });
+      dispatch({ type: ORDER_SUMMARY_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: ORDER_CREATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
