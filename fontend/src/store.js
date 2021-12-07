@@ -1,12 +1,25 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import thunk from "redux-thunk"
 import { cartReducer } from "./redux/reducers/cartReducers";
-import { productCreateReducer, productDeleteReducer, productDetailReducer, productReducer, productUpdateReducer, productReviewCreateReducer } from "./redux/reducers/productReducers";
+import { productCreateReducer, 
+        productDeleteReducer, 
+        productDetailReducer, 
+        productReducer, 
+        productUpdateReducer, 
+        productReviewCreateReducer,
+        productCategoryListReducer, } from "./redux/reducers/productReducers";
 import { authReducer } from './redux/reducers/authReducer';
 import { tokenReducer } from './redux/reducers/tokenReducer';
 import { Provider } from 'react-redux'
-import { userDeleteReducer, userDetailsReducer, userListReducer, userUpdateProfileReducer, userUpdateReducer, userTopSellerListReducer, } from "./redux/reducers/userReducers";
+import { userDeleteReducer, 
+    userDetailsReducer, 
+    userListReducer, 
+    userUpdateProfileReducer, 
+    userUpdateReducer, 
+    userTopSellerListReducer, 
+    userAddressMapReducer,} from "./redux/reducers/userReducers";
 import {
+    orderSummaryReducer,
     orderCreateReducer,
     orderDeleteReducer,
     orderDeliverReducer,
@@ -34,6 +47,7 @@ const reducer = combineReducers({
     userDelete: userDeleteReducer,
     userUpdate: userUpdateReducer,
     userTopSellersList: userTopSellerListReducer,
+    userAddressMap: userAddressMapReducer,
     // reviews
     productReviewCreate: productReviewCreateReducer,
     // order
@@ -44,6 +58,8 @@ const reducer = combineReducers({
     orderDetails: orderDetailsReducer,
     orderPay: orderPayReducer,
     orderMineList: orderMineListReducer,
+    productCategoryList: productCategoryListReducer,
+    orderSummary: orderSummaryReducer
 })
 const initialState = {
     cart: {
