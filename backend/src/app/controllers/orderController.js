@@ -73,11 +73,11 @@ class OrderController {
                 id: req.body.id,
                 status: req.body.status,
                 update_time: req.body.update_time,
-                email_address: req.body.email_address,
+                email_address: order.user.email,
             };
             const updatedOrder = await order.save();//update info
             console.log(order)
-            orderMail("tranquoc16520@gmail.com", order._id, order.orderItems.price, order.shippingAddress.address, order.orderItems.price + 15, req.body.update_time, order.orderItems.name)
+            orderMail(order.user.email, order._id, order.orderItems.price, order.shippingAddress.address, order.orderItems.price + 15, req.body.update_time, order.orderItems.name)
             // orderMail("tranquoc16520@gmail.com","123456", 90, "Quốc", "HCM")
 
             res.send({ message: 'Order Paid', order: updatedOrder });
