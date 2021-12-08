@@ -55,7 +55,6 @@ function App() {
 
   const productCategoryList = useSelector((state) => state.productCategoryList);
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-  const { user } = auth
   const cart = useSelector(state => state.cart);
   const { cartItems } = cart
 
@@ -78,27 +77,6 @@ function App() {
     } catch (err) {
       window.location.href = "/";
     }
-  }
-
-  const userLink = () => {
-    return (
-      <React.Fragment>
-        <div className="dropdown">
-          <img className="superSmall image-profile" src={user.avatar} alt={user.name} />
-          <Link to="#">
-            {user.name}
-            <i className="fas fa-angle-down"></i>
-          </Link>
-          <ul className="dropdown-contents">
-            <li><Link to="/profile">Profile</Link></li>
-            <li>
-              <Link to="/orderhistory">Order History</Link>
-            </li>
-            <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
-          </ul>
-        </div>
-      </React.Fragment>
-    )
   }
 
   useEffect(() => {
@@ -137,7 +115,9 @@ function App() {
             >
               <i className="fa fa-bars"></i>
             </button>
-            <Link className="brand" to="/"> T2Q Market </Link>
+            <Link className="brand" to="/">
+              T2Q Market
+            </Link>
           </div>
           <div>
             <Route
@@ -146,20 +126,36 @@ function App() {
               )}
             ></Route>
           </div>
-          <div className="header-nav">
+          <div>
             <Link to="/cart">
               Cart
-              {
-                cartItems.length > 0 && (
-                  <span className="badge">{cartItems.length}</span>
-                )
-              }
+              {cartItems.length > 0 && (
+                <span className="badge">{cartItems.length}</span>
+              )}
             </Link>
-            {
-              isLogged
-                ? userLink()
-                : <Link to="/signin"><i className="fas fa-user"></i> Sign in</Link>
-            }
+            {isLogged ? (
+              <div className="dropdown">
+                <Link to="#">
+                  {/* <image src='https://lh3.googleusercontent.com/a/AATXAJwLeLTsWIqv07XKtapDWIveI93fA1d1lWq-oAMM=s96-c' /> */}
+                  {auth.user.name} <i className="fa fa-caret-down"></i>{' '}
+                </Link>
+                <ul className="dropdown-content">
+                  <li>
+                    <Link to="/profile">User Profile</Link>
+                  </li>
+                  <li>
+                    <Link to="/orderhistory">Order History</Link>
+                  </li>
+                  <li>
+                    <Link to="#signout" onClick={handleLogout}>
+                      Sign Out
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <Link to="/signin">Sign In</Link>
+            )}
             {isLogged && auth.user.isSeller && (
               <div className="dropdown">
                 <Link to="#admin">
@@ -270,6 +266,7 @@ function App() {
           <Route path="/orderlist/seller" component={OrderListScreen} exact></Route>
 
           {/* Search */}
+          <Route path="/search/name" component={SearchScreen} exact></Route>
           <Route
             path="/search/name/:name?"
             component={SearchScreen}

@@ -67,7 +67,7 @@ export default function OrderScreen(props) {
       };
 
     const successPaymentHandler = (paymentResult) => {
-        dispatch(payOrder(order, paymentResult, token))
+        dispatch(payOrder(order, paymentResult, token))      
     }
 
     return loading ? (<LoadingBox></LoadingBox>) :

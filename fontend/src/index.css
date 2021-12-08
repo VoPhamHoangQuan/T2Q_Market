@@ -468,4 +468,8 @@ img.large {
   background-color: #f02020;
 }
 
-@import url("./Screens/auth.css");
+#q {
+  width: 800px;
+}
+
+@import url(./Screens/auth.css);

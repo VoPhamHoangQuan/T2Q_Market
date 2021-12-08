@@ -389,7 +389,6 @@ const orderMail = (to, orderId, productPurchase, deliveryAddress, total, time, p
                                                                                         <tr>
                                                                                             <td class="esd-block-text es-p10b" align="left">
                                                                                                 <p>${deliveryAddress}</p>
-                                                                                                <p>${deliveryAddress}</p>
                                                                                             </td>
                                                                                         </tr>
                                                                                     </tbody>

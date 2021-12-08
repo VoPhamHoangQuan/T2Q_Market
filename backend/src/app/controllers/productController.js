@@ -1,7 +1,6 @@
 const ProductModel = require('../models/product')
 const data = require('../../data')
 
-const PAGE_SIZE = 2
 class ProductController {
     // GET seed products
     seedProducts(req, res, next) {
@@ -50,6 +49,7 @@ class ProductController {
             ...categoryFilter,
             ...priceFilter,
             ...ratingFilter,
+            deleted: false,
         })
             .populate('seller', 'seller.name seller.logo')
             .sort(sortOrder)
@@ -99,7 +99,7 @@ class ProductController {
 
     // DELETE product
     async deleteProduct(req, res, next) {
-        await ProductModel.deleteOne({ _id: req.params.id })
+        await ProductModel.delete({ _id: req.params.id })
             .then(() => res.send('OK'))
             .catch(next)
     }

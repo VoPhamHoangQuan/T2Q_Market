@@ -105,7 +105,7 @@ export const deleteProduct = (productId, token) => async (dispatch, getState) =>
     const { data } = Axios.delete(`/api/products/${productId}`, {
       headers: { Authorization: token },
     });
-    dispatch({ type: PRODUCT_DELETE_SUCCESS });
+    dispatch({ type: PRODUCT_DELETE_SUCCESS, payload: data });
   } catch (error) {
     const message =
       error.response && error.response.data.message

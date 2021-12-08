@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "googleapis": "^89.0.0",
+    "mongoose-delete": "^0.5.4",
     "multer": "^1.4.3",
     "nodemailer": "^6.7.0",
     "nodemon": "^2.0.4",

@@ -24,7 +24,6 @@ dotenv.config();
 
 const __name = path.resolve();
 app.use('/uploads', express.static(path.join(__name, '/uploads')))
-
 const router = require('./src/routes')
 
 
