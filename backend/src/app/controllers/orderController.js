@@ -1,4 +1,8 @@
 const orderModel = require('../models/order')
+const userModel = require('../models/users')
+const productModel = require('../models/product')
+const orderMail = require('./orderMail')
+const sendEmail = require('./sendMail')
 
 class OrderController {
     //  admin get all orders
@@ -56,7 +60,10 @@ class OrderController {
 
     //update status of order, only access user can add payment
     async updateStatus(req, res) {
-        const order = await orderModel.findById(req.params.id);//find by id get from url
+        const order = await orderModel.findById(req.params.id).populate(
+            'user',
+            'email name'
+        );
         if (order) {//if have order
             //set info of order
             order.isPaid = true;
@@ -66,9 +73,13 @@ class OrderController {
                 id: req.body.id,
                 status: req.body.status,
                 update_time: req.body.update_time,
-                email_address: req.body.email_address,
+                email_address: order.user.email,
             };
             const updatedOrder = await order.save();//update info
+            console.log(order)
+            orderMail(order.user.email, order._id, order.orderItems.price, order.shippingAddress.address, order.orderItems.price + 15, req.body.update_time, order.orderItems.name)
+            // orderMail("tranquoc16520@gmail.com","123456", 90, "Quốc", "HCM")
+
             res.send({ message: 'Order Paid', order: updatedOrder });
         } else {
             //send error
@@ -101,6 +112,44 @@ class OrderController {
         }
     }
 
+    async getDashboard(req, res, next) {
+        const orders = await orderModel.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    numOrders: { $sum: 1 },
+                    totalSales: { $sum: '$totalPrice' },
+                },
+            },
+        ]);
+        const users = await userModel.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    numUsers: { $sum: 1 },
+                },
+            },
+        ]);
+        const dailyOrders = await orderModel.aggregate([
+            {
+                $group: {
+                    _id: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } },
+                    orders: { $sum: 1 },
+                    sales: { $sum: '$totalPrice' },
+                },
+            },
+            { $sort: { _id: 1 } },
+        ]);
+        const productCategories = await productModel.aggregate([
+            {
+                $group: {
+                    _id: '$category',
+                    count: { $sum: 1 },
+                },
+            },
+        ]);
+        res.send({ users, orders, dailyOrders, productCategories });
+    }
 }
 
 

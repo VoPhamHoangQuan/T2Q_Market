@@ -1,4 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'
+import SearchBox from './components/SearchBox';
+import { listProductCategories } from './redux/actions/productActions';
+import LoadingBox from './components/LoadingBox';
+import MessageBox from './components/MessageBox';
+
 import axios from 'axios';
 import { dispatchLogin, fetchUser, dispatchGetUser } from './redux/actions/authAction'
 import { useSelector, useDispatch } from 'react-redux';
@@ -32,8 +38,12 @@ import SupportScreen from './Screens/SupportScreen'
 import OrderListScreen from './Screens/OrderListScreen'
 import PaymentMethodScreen from './Screens/PaymentMethodScreen';
 import PlaceOrderScreen from './Screens/PlaceOrderScreen';
+import DashboardScreen from './Screens/DashboardScreen';
 // Seller
 import SellerScreen from './Screens/SellerScreen';
+import SearchScreen from './Screens/SearchScreen';
+import MapScreen from './Screens/MapScreen';
+// Seller
 import OrderScreen from './Screens/OrderScreen';
 
 
@@ -42,6 +52,53 @@ function App() {
   const dispatch = useDispatch()
   const token = useSelector(state => state.token)
   const auth = useSelector(state => state.auth)
+
+  const productCategoryList = useSelector((state) => state.productCategoryList);
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+  const { user } = auth
+  const cart = useSelector(state => state.cart);
+  const { cartItems } = cart
+
+  const {
+    loading: loadingCategories,
+    error: errorCategories,
+    categories,
+  } = productCategoryList;
+
+  useEffect(() => {
+    dispatch(listProductCategories());
+  }, [dispatch]);
+
+  const handleLogout = async () => {
+    try {
+      await axios.get('/logout')
+      localStorage.removeItem('firstLogin')
+      localStorage.removeItem('cartItems')
+      window.location.href = "/";
+    } catch (err) {
+      window.location.href = "/";
+    }
+  }
+
+  const userLink = () => {
+    return (
+      <React.Fragment>
+        <div className="dropdown">
+          {
+            user.avatar &&
+            (<img className="superSmall image-profile" src={user.avatar} alt={user.name} />)
+          }
+          <Link to="#">
+            {user.name} <i className="fas fa-angle-down"></i>
+          </Link>
+          <ul className="dropdown-content user">
+            <li><Link to="/profile">Profile</Link></li>
+            <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
+          </ul>
+        </div>
+      </React.Fragment>
+    )
+  }
 
   useEffect(() => {
     const firstLogin = localStorage.getItem('firstLogin')
@@ -66,18 +123,123 @@ function App() {
       getUser()
     }
   }, [token, dispatch])
-  const {isLogged, isAdmin} = auth
+  const { isLogged, isAdmin } = auth
   return (
     <BrowserRouter>
       <div className="grid-container">
-        <Header />
+        <header className="row">
+          <div>
+            <button
+              type="button"
+              className="open-sidebar"
+              onClick={() => setSidebarIsOpen(true)}
+            >
+              <i className="fa fa-bars"></i>
+            </button>
+            <Link className="brand" to="/"> T2Q Market </Link>
+          </div>
+          <div>
+            <Route
+              render={({ history }) => (
+                <SearchBox history={history}></SearchBox>
+              )}
+            ></Route>
+          </div>
+          <div className="header-nav">
+
+            {
+              isLogged
+                ? userLink()
+                : <Link to="/signin"><i className="fas fa-user"></i> Sign in</Link>
+            }
+            {isLogged && auth.user.isSeller && (
+              <div className="dropdown">
+                <Link to="#admin">
+                  Seller <i className="fa fa-caret-down"></i>
+                </Link>
+                  <ul className="dropdown-content seller">
+                    <li>
+                      <Link to="/productlist/seller">Products</Link>
+                    </li>
+                    <li>
+                      <Link to="/orderlist/seller">Orders</Link>
+                    </li>
+                  </ul>
+                </div>
+            )}
+            {isLogged && isAdmin && (
+              <div className="dropdown">
+                <Link to="#admin">
+                  Admin {' '} <i className="fa fa-caret-down"></i>
+                </Link>
+                <ul className="dropdown-content admin">
+                  <li>
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li>
+                  <li>
+                    <Link to="/productlist">Products</Link>
+                  </li>
+                  <li>
+                    <Link to="/orderlist">Orders</Link>
+                  </li>
+                  <li>
+                    <Link to="/userlist">Users</Link>
+                  </li>
+                  <li>
+                    <Link to="/support">Support</Link>
+                  </li>
+                </ul>
+              </div>
+            )}
+
+            <Link to="/cart">
+              <i class="fas fa-shopping-cart fa-2x"></i>
+              {
+                cartItems.length > 0 && (
+                  <span className="badge">{cartItems.length}</span>
+                )
+              }
+            </Link>
+          </div>
+        </header>
+        <aside className={sidebarIsOpen ? 'open' : ''}>
+          <ul className="categories">
+            <li>
+              <strong>Categories</strong>
+              <button
+                onClick={() => setSidebarIsOpen(false)}
+                className="close-sidebar"
+                type="button"
+              >
+                <i className="fa fa-close"></i>
+              </button>
+            </li>
+            {loadingCategories ? (
+              <LoadingBox></LoadingBox>
+            ) : errorCategories ? (
+              <MessageBox variant="danger">{errorCategories}</MessageBox>
+            ) : (
+              categories.map((c) => (
+                <li key={c}>
+                  <Link
+                    to={`/search/category/${c}`}
+                    onClick={() => setSidebarIsOpen(false)}
+                  >
+                    {c}
+                  </Link>
+                </li>
+              ))
+            )}
+          </ul>
+        </aside>
         <main>
-          
+
+          <Route path="/pageNumber/:pageNumber" component={HomeScreen} exact></Route>
           <Route path="/" component={HomeScreen} exact></Route>
           {/* user and profile */}
-          <Route path="/profile" component={isLogged?ProfileScreen : NotFound} exact></Route>
-          <Route path="/userlist" component={isAdmin?UserListScreen : NotFound} exact></Route>
-          <Route path="/user/:id/edit" component={isAdmin?UserEditScreen : NotFound} exact></Route>
+          <Route path="/profile" component={isLogged ? ProfileScreen : NotFound} exact></Route>
+          <Route path="/userlist" component={isAdmin ? UserListScreen : NotFound} exact></Route>
+          <Route path="/user/:id/edit" component={isAdmin ? UserEditScreen : NotFound} exact></Route>
 
           {/* Product */}
           <Route path="/product/:id" component={ProductScreen} exact></Route>
@@ -91,10 +253,10 @@ function App() {
           <Route path="/forgot_password" component={ForgotPass} exact />
           <Route path="/reset/:token" component={ResetPass} exact />
           <Route path="/activation/:activation_token" component={ActivationEmail} exact />
-          <Route path="/productlist" component={ProductListScreen} exact/>
+          <Route path="/productlist" component={ProductListScreen} exact />
 
           {/* Chat Box */}
-          <Route path="/support" component={isAdmin?SupportScreen : NotFound} exact></Route>
+          <Route path="/support" component={isAdmin ? SupportScreen : NotFound} exact></Route>
 
           {/* Order */}
           <Route path="/orderlist" component={OrderListScreen} exact></Route>
@@ -105,7 +267,39 @@ function App() {
           {/* Seller */}
           <Route path="/seller/:id" component={SellerScreen} exact></Route>
           <Route path="/productlist/seller" component={ProductListScreen} exact></Route>
-          <Route  path="/orderlist/seller" component={OrderListScreen} exact></Route>
+          <Route path="/orderlist/seller" component={OrderListScreen} exact></Route>
+
+          {/* Search */}
+          <Route
+            path="/search/name/:name?"
+            component={SearchScreen}
+            exact
+          ></Route>
+          <Route
+            path="/search/category/:category"
+            component={SearchScreen}
+            exact
+          ></Route>
+          <Route
+            path="/search/category/:category/name/:name"
+            component={SearchScreen}
+            exact
+          ></Route>
+          <Route
+            path="/search/category/:category/name/:name/min/:min/max/:max/rating/:rating/order/:order/pageNumber/:pageNumber"
+            component={SearchScreen}
+            exact
+          ></Route>
+          <Route path="/map" component={isLogged ? MapScreen : NotFound} exact></Route>
+          <Route path="/dashboard" component={isAdmin ? DashboardScreen : NotFound} exact></Route>
+          <Route
+            path="/productlist/pageNumber/:pageNumber"
+            component={isAdmin ? ProductListScreen : NotFound}
+            exact></Route>
+          <Route
+            path="/productlist/seller/pageNumber/:pageNumber"
+            component={ProductListScreen}
+            exact></Route>
 
 
 

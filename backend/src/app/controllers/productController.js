@@ -9,47 +9,53 @@ class ProductController {
         res.send(createdProducts);
     }
 
-    // GET product
-    // async getAllProducts(req, res, next) {
-    //     const seller = req.query.seller || '';
-    //     const sellerFilter = seller ? { seller } : {};
-    //     const products = await ProductModel.find({ ...sellerFilter });
-    //     const totalCount = products.length
-    //     // console.log(totalCount);
-    //     var page = req.query.page
-    //     if (page) {
-    //         // get page 
-    //         page = parseInt(page)
-    //         if (page < 1) {
-    //             page = 1
-    //         } if (page > Math.ceil(totalCount / PAGE_SIZE)) {
-    //             page = Math.ceil(totalCount / PAGE_SIZE)
-    //             console.log(page)
-    //         }
-    //         var skip = (page - 1) * PAGE_SIZE
-    //         await ProductModel.find({ ...sellerFilter })
-    //             .skip(skip)
-    //             .limit(PAGE_SIZE)
-    //             .then(data => res.json(data))
-    //             .catch(next)
-    //     } else {
-    //         // get All Product
-    //         await ProductModel.find({ ...sellerFilter })
-    //             .then(data => res.json(data))
-    //             .catch(next)
-    //     }
-
-    // }
-
     async getAllProducts(req, res, next) {
+        const pageSize = 4;
+        const page = Number(req.query.pageNumber) || 1;
+        const name = req.query.name || '';
         const seller = req.query.seller || '';
+        const category = req.query.category || '';
+        const order = req.query.order || '';
+        const min =
+            req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
+        const max =
+            req.query.max && Number(req.query.max) !== 0 ? Number(req.query.max) : 0;
+        const rating =
+            req.query.rating && Number(req.query.rating) !== 0
+                ? Number(req.query.rating)
+                : 0;
+        const nameFilter = name ? { name: { $regex: name, $options: 'i' } } : {};
         const sellerFilter = seller ? { seller } : {};
-        await ProductModel.find({ ...sellerFilter }).populate(
-            'seller',
-            'seller.name seller.logo'
-        )
-            .then(data => res.json(data))
-            .catch(next)
+        const categoryFilter = category ? { category } : {};
+        const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
+        const ratingFilter = rating ? { rating: { $gte: rating } } : {};
+        const sortOrder =
+            order === 'lowest'
+                ? { price: 1 }
+                : order === 'highest'
+                    ? { price: -1 }
+                    : order === 'toprated'
+                        ? { rating: -1 }
+                        : { _id: -1 };
+        const count = await ProductModel.count({
+            ...sellerFilter,
+            ...nameFilter,
+            ...categoryFilter,
+            ...priceFilter,
+            ...ratingFilter,
+        });
+        const products = await ProductModel.find({
+            ...sellerFilter,
+            ...nameFilter,
+            ...categoryFilter,
+            ...priceFilter,
+            ...ratingFilter,
+        })
+            .populate('seller', 'seller.name seller.logo')
+            .sort(sortOrder)
+            .skip(pageSize * (page - 1))
+            .limit(pageSize);
+        res.send({ products, page, pages: Math.ceil(count / pageSize) });
     }
 
 
@@ -66,7 +72,6 @@ class ProductController {
 
     // POST product 
     async createProduct(req, res, next) {
-        console.log(req.user.id)
         const product = new ProductModel({
             name: 'sample name' + Date.now(),
             seller: req.user.id,
@@ -127,6 +132,12 @@ class ProductController {
         } else {
             res.status(404).send({ message: 'Product Not Found' });
         }
+    }
+
+    // GET category
+    async getCategory(req, res) {
+        const categories = await ProductModel.find({}).distinct('category');
+        res.send(categories);
     }
 }
 

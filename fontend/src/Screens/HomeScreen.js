@@ -37,7 +37,7 @@ export default function HomeScreen() {
         dispatch(listTopSellers())
     }, [dispatch])
     return (
-        <div className="row center">
+        <div>
             <h2>Top Sellers</h2>
             {loadingSellers ? (
                 <LoadingBox></LoadingBox>
@@ -76,20 +76,6 @@ export default function HomeScreen() {
 
 
                         )}
-            {/* <div>
-                <button
-                    className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l"
-                    onClick={prevPage}
-                >
-                    Prev
-                </button>
-                <button
-                    className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r"
-                    onClick={nextPage}
-                >
-                    Next
-                </button>
-            </div> */}
         </div>
     )
 }

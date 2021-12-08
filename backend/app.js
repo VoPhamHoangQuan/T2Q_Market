@@ -34,6 +34,9 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(cookieParser());
 
+app.get('/api/config/google', (req, res) => {
+	res.send(process.env.GOOGLE_API_KEY || '');
+});
 router(app)
 
 const port = process.env.PORT || 5000
