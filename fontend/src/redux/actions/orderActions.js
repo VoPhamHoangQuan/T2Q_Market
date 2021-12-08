@@ -83,10 +83,10 @@ export const payOrder = (order, paymentResult, token) => async (dispatch, getSta
 };
 
 //return list order of current user
-export const listOrderMine = (token) => async (dispatch, getState) => {
+export const listOrderMine = (userId, token) => async (dispatch, getState) => {
     dispatch({ type: ORDER_MINE_LIST_REQUEST });
     try {
-        const { data } = await Axios.get('/api/orders/mine', {
+        const { data } = await Axios.get(`/api/orders/${userId}/mine`, {
             headers: {
                 Authorization: token,
             },

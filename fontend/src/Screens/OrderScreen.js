@@ -123,7 +123,7 @@ export default function OrderScreen(props) {
                                                                 />
                                                             </div>
                                                             <div className="min-30">
-                                                                <Link to={`/api/product/${item.product}`}>{item.name}</Link>
+                                                                <Link to={`/product/${item.product}`}>{item.name}</Link>
                                                             </div>
                                                             <div>{item.quantity} x ${item.price} = ${item.quantity * item.price}</div>
                                                         </div>
