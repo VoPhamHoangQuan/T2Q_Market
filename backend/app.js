@@ -30,7 +30,9 @@ const router = require('./src/routes')
 
 
 app.use(bodyParser.json());
+
 app.use(cors());
+
 app.use(cookieParser());
 
 app.get('/api/config/google', (req, res) => {

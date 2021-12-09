@@ -316,9 +316,9 @@ img.large {
   z-index: 1;
   background-color: #203040;
   margin: 0;
-  margin-top: 12rem;
   border-radius: 0.5rem;
 }
+
 
 .dropdown-content.user{
   margin-top: 10rem
