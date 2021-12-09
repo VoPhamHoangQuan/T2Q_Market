@@ -18,6 +18,7 @@ export default function ProductEditScreen(props) {
     const [amount, setCountInStock] = useState('');
     const [brand, setBrand] = useState('');
     const [description, setDescription] = useState('');
+    
 
     const productDetails = useSelector((state) => state.productDetail);//get info from react-redux
     const { loading, error, product } = productDetails;//get state of action
@@ -67,6 +68,7 @@ export default function ProductEditScreen(props) {
                 description,
             }, token)
         );
+        window.location.reload();
     };
     const [loadingUpload, setLoadingUpload] = useState(false);
     const [errorUpload, setErrorUpload] = useState('');
@@ -132,6 +134,7 @@ export default function ProductEditScreen(props) {
                                 placeholder="Enter image"
                                 value={image}
                                 onChange={(e) => setImage(e.target.value)}
+                                disabled
                             ></input>
                         </div>
                         <div>
@@ -163,8 +166,9 @@ export default function ProductEditScreen(props) {
                                 id="brand"
                                 type="text"
                                 placeholder="Enter brand"
-                                value={brand}
+                                value={product.seller.seller.name}
                                 onChange={(e) => setBrand(e.target.value)}
+                                disabled
                             ></input>
                         </div>
                         <div>

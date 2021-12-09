@@ -22,7 +22,7 @@ class UserController {
 
     async getUsersAllInfor(req, res) {
         try {
-            const users = await userModel.find({})
+            const users = await userModel.find({deleted : false})
             res.send(users)
         } catch (err) {
             return res.status(500).json({ msg: err.message })
@@ -62,7 +62,7 @@ class UserController {
     }
 
     async deleteUser(req, res, next) {
-        await userModel.deleteOne({ _id: req.params.id })
+        await userModel.delete({ _id: req.params.id })
             .then(() => res.send('OK'))
             .catch(next)
     }

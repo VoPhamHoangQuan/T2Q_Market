@@ -8,7 +8,7 @@ const isSellerOrAdmin = require('../middleware/isSellerOrAdmin')
 
 router.get('/summary', isAuth, isAdmin, orderController.getDashboard)
 router.get('/:id', isAuth, orderController.getDetailsOrder)
-router.get('/mine', isAuth, orderController.getOrder)
+router.get('/:id/mine', isAuth, orderController.getOrder)
 router.put('/:id/pay', isAuth, orderController.updateStatus)
 router.delete('/:id', isAuth, isSellerOrAdmin, orderController.deleteOder)
 router.put('/:id/deliver',isAuth, isAdmin, orderController.updateDeliver)

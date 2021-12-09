@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+//search box redirect user to search pages
 export default function SearchBox(props) {
     const [name, setName] = useState('');
     const submitHandler = (e) => {

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongooseDelete = require('mongoose-delete');
 
 const orderSchema = new mongoose.Schema(
     {
@@ -36,6 +37,7 @@ const orderSchema = new mongoose.Schema(
         taxPrice: { type: Number, required: true },
         totalPrice: { type: Number, required: true },
         user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },//link to user
+        seller: { type: mongoose.Schema.Types.ObjectID, ref: 'User' },
         isPaid: { type: Boolean, default: false },//status
         paidAt: { type: Date },
         isDelivered: { type: Boolean, default: false },
@@ -45,4 +47,8 @@ const orderSchema = new mongoose.Schema(
         timestamps: true,
     }
 );
+
+orderSchema.plugin(mongooseDelete, {
+    deletedAt: true
+})
 module.exports = mongoose.model('orders', orderSchema)

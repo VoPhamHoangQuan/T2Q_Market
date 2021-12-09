@@ -17,9 +17,8 @@ import SigninScreen from './Screens/Login';
 import ActivationEmail from './Screens/ActivationEmail'
 import ForgotPass from './Screens/ForgotPassword'
 import ResetPass from './Screens/ResetPassword'
-import Header from './components/header/Header'
+import Loading from './components/LoadingBox'
 import ShippingAddressScreen from './Screens/ShippingAddressScreen'
-import NotFound from './components/utils/NotFound/NotFound'
 
 // Admin
 import ProductEditScreen from './Screens/ProductEditScreen';
@@ -39,6 +38,7 @@ import OrderListScreen from './Screens/OrderListScreen'
 import PaymentMethodScreen from './Screens/PaymentMethodScreen';
 import PlaceOrderScreen from './Screens/PlaceOrderScreen';
 import DashboardScreen from './Screens/DashboardScreen';
+import OrderHistoryScreen from './Screens/OrderHistoryScreen';
 // Seller
 import SellerScreen from './Screens/SellerScreen';
 import SearchScreen from './Screens/SearchScreen';
@@ -86,7 +86,7 @@ function App() {
         <div className="dropdown">
           {
             user.avatar &&
-            (<img className="superSmall image-profile" src={user.avatar} alt={user.name} />)
+            (<img className="superSmall image-profile" src={user.avatar} alt={''} />)
           }
           <Link to="#">
             {user.name} <i className="fas fa-angle-down"></i>
@@ -237,9 +237,9 @@ function App() {
           <Route path="/pageNumber/:pageNumber" component={HomeScreen} exact></Route>
           <Route path="/" component={HomeScreen} exact></Route>
           {/* user and profile */}
-          <Route path="/profile" component={isLogged ? ProfileScreen : NotFound} exact></Route>
-          <Route path="/userlist" component={isAdmin ? UserListScreen : NotFound} exact></Route>
-          <Route path="/user/:id/edit" component={isAdmin ? UserEditScreen : NotFound} exact></Route>
+          <Route path="/profile" component={isLogged ? ProfileScreen : Loading} exact></Route>
+          <Route path="/userlist" component={isAdmin ? UserListScreen : Loading} exact></Route>
+          <Route path="/user/:id/edit" component={isAdmin ? UserEditScreen : Loading} exact></Route>
 
           {/* Product */}
           <Route path="/product/:id" component={ProductScreen} exact></Route>
@@ -253,16 +253,17 @@ function App() {
           <Route path="/forgot_password" component={ForgotPass} exact />
           <Route path="/reset/:token" component={ResetPass} exact />
           <Route path="/activation/:activation_token" component={ActivationEmail} exact />
-          <Route path="/productlist" component={ProductListScreen} exact />
+          <Route path="/productlist" component={isAdmin ? ProductListScreen : Loading} exact />
 
           {/* Chat Box */}
-          <Route path="/support" component={isAdmin ? SupportScreen : NotFound} exact></Route>
+          <Route path="/support" component={isAdmin ? SupportScreen : Loading} exact></Route>
 
           {/* Order */}
-          <Route path="/orderlist" component={OrderListScreen} exact></Route>
+          <Route path="/orderlist" component={isAdmin ? OrderListScreen : Loading} exact></Route>
           <Route path="/order/:id" component={OrderScreen} ></Route>
           <Route path="/payment" component={PaymentMethodScreen}></Route>
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
+          <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
 
           {/* Seller */}
           <Route path="/seller/:id" component={SellerScreen} exact></Route>
@@ -270,6 +271,7 @@ function App() {
           <Route path="/orderlist/seller" component={OrderListScreen} exact></Route>
 
           {/* Search */}
+          {/* <Route path="/search/name" component={SearchScreen} exact></Route> */}
           <Route
             path="/search/name/:name?"
             component={SearchScreen}
@@ -290,23 +292,17 @@ function App() {
             component={SearchScreen}
             exact
           ></Route>
-          <Route path="/map" component={isLogged ? MapScreen : NotFound} exact></Route>
-          <Route path="/dashboard" component={isAdmin ? DashboardScreen : NotFound} exact></Route>
+          <Route path="/map" component={isLogged ? MapScreen : Loading} exact></Route>
+          <Route path="/dashboard" component={isAdmin ? DashboardScreen : Loading} exact></Route>
           <Route
             path="/productlist/pageNumber/:pageNumber"
-            component={isAdmin ? ProductListScreen : NotFound}
+            component={isAdmin ? ProductListScreen : Loading}
             exact></Route>
           <Route
             path="/productlist/seller/pageNumber/:pageNumber"
             component={ProductListScreen}
             exact></Route>
-
-
-
         </main>
-        <footer className="row center">
-          All right reverse
-        </footer>
         <footer className="row center">
           {auth.user && !isAdmin && <ChatBox userInfo={auth.user} />}
           <div>All right reserved</div>{' '}

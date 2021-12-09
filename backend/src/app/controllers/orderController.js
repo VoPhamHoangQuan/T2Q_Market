@@ -10,7 +10,7 @@ class OrderController {
         const seller = req.query.seller || '';
         const sellerFilter = seller ? { seller } : {};
 
-        const orders = await orderModel.find({ ...sellerFilter }).populate(
+        const orders = await orderModel.find({ ...sellerFilter, deleted: false }).populate(
             'user',
             'name'
         );
@@ -19,7 +19,7 @@ class OrderController {
 
     //route to return order of current user
     async getOrder(req, res) {
-        const orders = await orderModel.find({ user: req.body._id });
+        const orders = await orderModel.find({ user: req.params.id });
         res.send(orders);
     }
 
@@ -76,9 +76,14 @@ class OrderController {
                 email_address: order.user.email,
             };
             const updatedOrder = await order.save();//update info
-            console.log(order)
-            orderMail(order.user.email, order._id, order.orderItems.price, order.shippingAddress.address, order.orderItems.price + 15, req.body.update_time, order.orderItems.name)
-            // orderMail("tranquoc16520@gmail.com","123456", 90, "Quốc", "HCM")
+            for (let i = 0; i < order.orderItems.length; i++) {
+                var product = await productModel.findById(order.orderItems[i].product)
+                if(product) {
+                    product.amount = product.amount - order.orderItems[i].quantity
+                }
+                await product.save()
+            }
+            orderMail(order.user.email, order._id, order.orderItems[0].price, order.shippingAddress.address, order.orderItems[0].price + 15, req.body.update_time, order.orderItems[0].name)
 
             res.send({ message: 'Order Paid', order: updatedOrder });
         } else {
@@ -89,9 +94,8 @@ class OrderController {
 
     //admin delete order
     async deleteOder(req, res) {
-        const order = await orderModel.findById(req.params.id);
+        const order = await orderModel.delete({ _id: req.params.id });
         if (order) {//if exist, call del func, send 
-            const deleteOrder = await order.remove();
             res.send({ message: 'Order Deleted', order: deleteOrder });
         } else {
             res.status(404).send({ message: 'Order Not Found' });
