@@ -93,6 +93,7 @@ function App() {
           </Link>
           <ul className="dropdown-content user">
             <li><Link to="/profile">Profile</Link></li>
+            <li><Link to="/orderhistory">Order History</Link></li>
             <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
           </ul>
         </div>
@@ -193,7 +194,7 @@ function App() {
             )}
 
             <Link to="/cart">
-              <i class="fas fa-shopping-cart fa-2x"></i>
+              <i className="fas fa-shopping-cart fa-2x"></i>
               {
                 cartItems.length > 0 && (
                   <span className="badge">{cartItems.length}</span>

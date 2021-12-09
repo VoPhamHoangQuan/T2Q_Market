@@ -19,7 +19,7 @@ class OrderController {
 
     //route to return order of current user
     async getOrder(req, res) {
-        const orders = await orderModel.find({ user: req.params.id });
+        const orders = await orderModel.find({ user: req.params.id, deleted: false })
         res.send(orders);
     }
 
