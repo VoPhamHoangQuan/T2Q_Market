@@ -8,13 +8,21 @@ class ProductController {
         res.send(createdProducts);
     }
 
+    // GET product HOME
+    async getAllProductsHome(req, res, next) {
+        await ProductModel.find({})
+                         .then(data => res.send(data))
+                         .catch(next)
+    }
+
     async getAllProducts(req, res, next) {
-        const pageSize = 12;
+        const pageSize = 8;
         const page = Number(req.query.pageNumber) || 1;
         const name = req.query.name || '';
         const seller = req.query.seller || '';
         const category = req.query.category || '';
         const order = req.query.order || '';
+        const id = req.query.id || '';
         const min =
             req.query.min && Number(req.query.min) !== 0 ? Number(req.query.min) : 0;
         const max =
@@ -28,6 +36,7 @@ class ProductController {
         const categoryFilter = category ? { category } : {};
         const priceFilter = min && max ? { price: { $gte: min, $lte: max } } : {};
         const ratingFilter = rating ? { rating: { $gte: rating } } : {};
+        const idFilter = id ? { id } : {};
         const sortOrder =
             order === 'lowest'
                 ? { price: 1 }
@@ -49,6 +58,7 @@ class ProductController {
             ...categoryFilter,
             ...priceFilter,
             ...ratingFilter,
+            ...idFilter,
             deleted: false,
         })
             .populate('seller', 'seller.name seller.logo')
@@ -91,9 +101,12 @@ class ProductController {
 
     // PUT product
     async editProduct(req, res, next) {
-        await ProductModel.updateOne({ _id: req.params.id }, req.body)
+        if (req.body.amount > 0 || typeof req.body.amount === 'number') {
+            await ProductModel.updateOne({ _id: req.params.id }, req.body)
             .then(data => res.json(data))
             .catch(next)
+        }
+        res.json({msg: 'Sai cau truc'})
 
     }
 

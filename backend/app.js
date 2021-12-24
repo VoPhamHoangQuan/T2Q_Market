@@ -8,6 +8,7 @@ const cors = require('cors');
 const cookieParser = require("cookie-parser");
 const db = require('./src/config/db')
 const path = require('path');
+const SortMiddleware = require('./src/middleware/SortMiddleWare')
 
 
 const app = express();
@@ -34,6 +35,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use(cookieParser());
+app.use(SortMiddleware)
 
 app.get('/api/config/google', (req, res) => {
 	res.send(process.env.GOOGLE_API_KEY || '');

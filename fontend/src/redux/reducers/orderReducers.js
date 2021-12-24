@@ -27,6 +27,10 @@ import {
   ORDER_SUMMARY_REQUEST,
   ORDER_SUMMARY_SUCCESS,
   ORDER_SUMMARY_FAIL,
+  ORDER_RESTORE_REQUEST,
+  ORDER_RESTORE_SUCCESS,
+  ORDER_RESTORE_FAIL,
+  ORDER_RESTORE_RESET,
 } from '../constants/orderConstants';
 
 //create to update status of redux
@@ -46,7 +50,7 @@ export const orderCreateReducer = (state = {}, action) => {
 };
 //get detail order of user.
 export const orderDetailsReducer = (
-  state = { loading: true},
+  state = { loading: true },
   action
 ) => {
   switch (action.type) {
@@ -56,6 +60,22 @@ export const orderDetailsReducer = (
       return { loading: false, order: action.payload };
     case ORDER_DETAILS_FAIL:
       return { loading: false, error: action.payload };//payload error
+    default:
+      return state;
+  }
+};
+
+//restore
+export const orderRestoreReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ORDER_RESTORE_REQUEST:
+      return { loading: true };
+    case ORDER_RESTORE_SUCCESS:
+      return { loading: false, success: true };
+    case ORDER_RESTORE_FAIL:
+      return { loading: false, error: action.payload };
+    case ORDER_RESTORE_RESET:
+      return {};
     default:
       return state;
   }

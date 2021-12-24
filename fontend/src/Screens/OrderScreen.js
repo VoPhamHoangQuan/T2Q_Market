@@ -23,6 +23,9 @@ export default function OrderScreen(props) {
     const token = useSelector(state => state.token);
     const auth = useSelector(state => state.auth);
     const orderDeliver = useSelector((state) => state.orderDeliver);
+    if (order !== undefined) {
+        order.priceUSD = Number((order.totalPrice / 22950).toFixed(2))
+    }
     const {
         loading: loadingDeliver,
         error: errorDeliver,
@@ -49,7 +52,7 @@ export default function OrderScreen(props) {
         ) {
             dispatch({ type: ORDER_PAY_RESET });
             dispatch({ type: ORDER_DELIVER_RESET });
-            dispatch(detailsOrder(orderId, token));
+            dispatch(detailsOrder(orderId, token, ''));
         }
         else {
             if (!order.isPaid) {
@@ -64,12 +67,11 @@ export default function OrderScreen(props) {
 
     const deliverHandler = () => {
         dispatch(deliverOrder(order._id, token));
-      };
+    };
 
     const successPaymentHandler = (paymentResult) => {
-        dispatch(payOrder(order, paymentResult, token))      
+        dispatch(payOrder(order, paymentResult, token))
     }
-
     return loading ? (<LoadingBox></LoadingBox>) :
         error ? (<MessageBox variant="danger">{error}</MessageBox>) :
             (
@@ -144,25 +146,25 @@ export default function OrderScreen(props) {
                                     <li>
                                         <div className="row">
                                             <div>Items</div>
-                                            <div>${order.itemsPrice.toFixed(2)}</div>
+                                            <div>{order.itemsPrice.toFixed(2)}đ</div>
                                         </div>
                                     </li>
                                     <li>
                                         <div className="row">
                                             <div>Shipping</div>
-                                            <div>${order.shippingPrice.toFixed(2)}</div>
+                                            <div>{order.shippingPrice.toFixed(2)}đ</div>
                                         </div>
                                     </li>
                                     <li>
                                         <div className="row">
                                             <div>Tax</div>
-                                            <div>${order.taxPrice.toFixed(2)}</div>
+                                            <div>{order.taxPrice.toFixed(2)}đ</div>
                                         </div>
                                     </li>
                                     <li>
                                         <div className="row">
                                             <div><strong>Total Price</strong></div>
-                                            <div><strong>${order.totalPrice.toFixed(2)}</strong></div>
+                                            <div><strong>{order.totalPrice.toFixed(2)}đ</strong></div>
                                         </div>
                                     </li>
                                     {
@@ -180,7 +182,7 @@ export default function OrderScreen(props) {
                                                                     loadingPay && <LoadingBox></LoadingBox>
                                                                 }
                                                                 <PayPalButton
-                                                                    amount={order.totalPrice}
+                                                                    amount={order.priceUSD}
                                                                     onSuccess={successPaymentHandler}
                                                                 ></PayPalButton>
                                                             </>

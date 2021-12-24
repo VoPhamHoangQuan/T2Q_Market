@@ -23,14 +23,14 @@ import {
   PRODUCT_CATEGORY_LIST_FAIL,
 } from "../constants/productConstants";
 
-export const listProducts = ({ seller = '', 
-                                pageNumber = '',
-                                name = '', 
-                                category = '', 
-                                order = '',
-                                min = 0,
-                                max = 0,
-                                rating = 0, }) => async (dispatch) => {
+export const listProducts = ({ seller = '',
+  pageNumber = '',
+  name = '',
+  category = '',
+  order = '',
+  min = 0,
+  max = 0,
+  rating = 0, }) => async (dispatch) => {
     // return function
     dispatch({
       type: PRODUCT_LIST_REQUEST,
@@ -45,6 +45,7 @@ export const listProducts = ({ seller = '',
       dispatch({ type: PRODUCT_LIST_FAIL, payload: error.message }); //false, return message.
     }
   };
+
 //get detail product by ID, same get list products
 export const detailProduct = (productId) => async (dispatch) => {
   dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productId });

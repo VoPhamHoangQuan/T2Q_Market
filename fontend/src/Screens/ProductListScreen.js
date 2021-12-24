@@ -94,6 +94,7 @@ export default function ProductListScreen(props) {
                                 <th>PRICE</th>
                                 <th>CATEGORY</th>
                                 <th>BRAND</th>
+                                <th>AMOUNT</th>
                                 <th>ACTIONS</th>
                             </tr>
                         </thead>
@@ -105,6 +106,7 @@ export default function ProductListScreen(props) {
                                     <td>{product.price}</td>
                                     <td>{product.category}</td>
                                     <td>{product.brand}</td>
+                                    <td>{product.amount}</td>
                                     <td>
                                         <button
                                             type="button"

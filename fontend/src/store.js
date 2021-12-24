@@ -26,7 +26,8 @@ import {
     orderDetailsReducer,
     orderListReducer,
     orderMineListReducer,
-    orderPayReducer
+    orderPayReducer, 
+    orderRestoreReducer
 } from "./redux/reducers/orderReducers";
 
 const reducer = combineReducers({
@@ -59,7 +60,8 @@ const reducer = combineReducers({
     orderPay: orderPayReducer,
     orderMineList: orderMineListReducer,
     productCategoryList: productCategoryListReducer,
-    orderSummary: orderSummaryReducer
+    orderSummary: orderSummaryReducer,
+    orderRestore: orderRestoreReducer,
 })
 const initialState = {
     cart: {

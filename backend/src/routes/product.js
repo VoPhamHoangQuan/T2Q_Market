@@ -4,6 +4,7 @@ const productController = require('../app/controllers/productController')
 const isAuth = require('../middleware/auth.middlewares')
 const isSellerOrAdmin = require('../middleware/isSellerOrAdmin')
 
+router.get('/home', productController.getAllProductsHome)
 router.get('/categories', productController.getCategory)
 router.delete('/:id',isAuth,isSellerOrAdmin, productController.deleteProduct)
 router.put('/:id',isAuth, isSellerOrAdmin, productController.editProduct)

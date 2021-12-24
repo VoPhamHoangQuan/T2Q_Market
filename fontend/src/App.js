@@ -35,6 +35,7 @@ import SupportScreen from './Screens/SupportScreen'
 
 // Order 
 import OrderListScreen from './Screens/OrderListScreen'
+import OrderListDeletedScreen from './Screens/OrderListDeletedScreen'
 import PaymentMethodScreen from './Screens/PaymentMethodScreen';
 import PlaceOrderScreen from './Screens/PlaceOrderScreen';
 import DashboardScreen from './Screens/DashboardScreen';
@@ -158,15 +159,15 @@ function App() {
                 <Link to="#admin">
                   Seller <i className="fa fa-caret-down"></i>
                 </Link>
-                  <ul className="dropdown-content seller">
-                    <li>
-                      <Link to="/productlist/seller">Products</Link>
-                    </li>
-                    <li>
-                      <Link to="/orderlist/seller">Orders</Link>
-                    </li>
-                  </ul>
-                </div>
+                <ul className="dropdown-content seller">
+                  <li>
+                    <Link to="/productlist/seller">Products</Link>
+                  </li>
+                  <li>
+                    <Link to="/orderlist/seller">Orders</Link>
+                  </li>
+                </ul>
+              </div>
             )}
             {isLogged && isAdmin && (
               <div className="dropdown">
@@ -234,9 +235,8 @@ function App() {
           </ul>
         </aside>
         <main>
-
-          <Route path="/pageNumber/:pageNumber" component={HomeScreen} exact></Route>
           <Route path="/" component={HomeScreen} exact></Route>
+          <Route path="/pageNumber/:pageNumber" component={HomeScreen} exact></Route>
           {/* user and profile */}
           <Route path="/profile" component={isLogged ? ProfileScreen : Loading} exact></Route>
           <Route path="/userlist" component={isAdmin ? UserListScreen : Loading} exact></Route>
@@ -261,6 +261,9 @@ function App() {
 
           {/* Order */}
           <Route path="/orderlist" component={isAdmin ? OrderListScreen : Loading} exact></Route>
+          <Route path="/orderlist/order/:order" component={isAdmin ? OrderListScreen : Loading} exact></Route>
+          <Route path="/orderlist/deleted" component={isAdmin ? OrderListDeletedScreen : Loading} exact></Route>
+          <Route path="/orderlist/deleted/order/:order" component={isAdmin ? OrderListDeletedScreen : Loading} exact></Route>
           <Route path="/order/:id" component={OrderScreen} ></Route>
           <Route path="/payment" component={PaymentMethodScreen}></Route>
           <Route path="/placeorder" component={PlaceOrderScreen}></Route>
@@ -270,6 +273,7 @@ function App() {
           <Route path="/seller/:id" component={SellerScreen} exact></Route>
           <Route path="/productlist/seller" component={ProductListScreen} exact></Route>
           <Route path="/orderlist/seller" component={OrderListScreen} exact></Route>
+          <Route path="/orderlist/deleted/seller" component={OrderListDeletedScreen} exact></Route>
 
           {/* Search */}
           {/* <Route path="/search/name" component={SearchScreen} exact></Route> */}

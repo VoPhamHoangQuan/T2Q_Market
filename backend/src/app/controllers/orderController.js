@@ -2,25 +2,56 @@ const orderModel = require('../models/order')
 const userModel = require('../models/users')
 const productModel = require('../models/product')
 const orderMail = require('./orderMail')
-const sendEmail = require('./sendMail')
 
 class OrderController {
     //  admin get all orders
     async getAll(req, res, next) {
         const seller = req.query.seller || '';
         const sellerFilter = seller ? { seller } : {};
+        const order = req.query.order || '';
+        const sortOrder =
+        order === 'new'
+            ? { createdAt: -1 }
+            : order === 'old'
+                ? { createdAt: 1 }
+                    : { _id: -1 };
 
         const orders = await orderModel.find({ ...sellerFilter, deleted: false }).populate(
             'user',
             'name'
-        );
+        ).sort(sortOrder);
+        res.send(orders)
+    }
+    // admin get all deleted order
+    async getAllDeleted(req, res, next) {
+        const seller = req.query.seller || '';
+        const sellerFilter = seller ? { seller } : {};
+        const order = req.query.order || '';
+        const sortOrder =
+        order === 'new'
+            ? { createdAt: -1 }
+            : order === 'old'
+                ? { createdAt: 1 }
+                    : { _id: -1 };
+
+        const orders = await orderModel.find({ ...sellerFilter, deleted: true }).populate(
+            'user',
+            'name'
+        ).sort(sortOrder);
         res.send(orders)
     }
 
     //route to return order of current user
     async getOrder(req, res) {
-        const orders = await orderModel.find({ user: req.params.id, deleted: false })
-        res.send(orders);
+        try {
+            const orders = await orderModel.find({ user: req.params.id, deleted: false })
+            console.log(req.params.id)
+            if (orders) res.send(orders);
+            res.status(400).json({ msg: 'Loi' })
+        }
+        catch (err) {
+            res.send(err);
+        }
     }
 
 
@@ -49,11 +80,15 @@ class OrderController {
 
     //only author user can access to detail order
     async getDetailsOrder(req, res) {
-        const order = await orderModel.findById(req.params.id);//order id
-        if (order) {
-            res.send(order);
-        } else {
-            res.status(404).send({ message: 'Order Not Found' });
+        try {
+            const order = await orderModel.findById(req.params.id);//order id
+            if (order) {
+                res.send(order);
+            } else {
+                res.status(404).send({ message: 'Order Not Found' });
+            }
+        } catch (err) {
+            res.send(err);
         }
     }
 
@@ -78,13 +113,12 @@ class OrderController {
             const updatedOrder = await order.save();//update info
             for (let i = 0; i < order.orderItems.length; i++) {
                 var product = await productModel.findById(order.orderItems[i].product)
-                if(product) {
+                if (product) {
                     product.amount = product.amount - order.orderItems[i].quantity
                 }
                 await product.save()
             }
-            orderMail(order.user.email, order._id, order.orderItems[0].price, order.shippingAddress.address, order.orderItems[0].price + 15, req.body.update_time, order.orderItems[0].name)
-
+            orderMail(order.user.email, order._id, order.orderItems[0].price, order.shippingAddress.address, order.totalPrice, req.body.update_time, order.orderItems[0].name, order.taxPrice, order.shippingPrice, order.user.name)
             res.send({ message: 'Order Paid', order: updatedOrder });
         } else {
             //send error
@@ -96,7 +130,18 @@ class OrderController {
     async deleteOder(req, res) {
         const order = await orderModel.delete({ _id: req.params.id });
         if (order) {//if exist, call del func, send 
-            res.send({ message: 'Order Deleted', order: deleteOrder });
+            res.send({ message: 'Order Deleted'});
+        } else {
+            res.status(404).send({ message: 'Order Not Found' });
+        }
+    }
+
+    //admin restore order
+    async restore(req, res) {
+        const order = await orderModel.restore({ _id: req.params.id });
+        console.log(req.headers.Authorization)
+        if (order) {//if exist, call del func, send 
+            res.send({ message: 'Order restore'});
         } else {
             res.status(404).send({ message: 'Order Not Found' });
         }
@@ -105,7 +150,7 @@ class OrderController {
     //admin change deliver status
     async updateDeliver(req, res, next) {
         const order = await orderModel.findById(req.params.id);//find order by id
-        if (order) {
+        if (order && order.deleted === false) {
             order.isDelivered = true;
             order.deliveredAt = Date.now();
 

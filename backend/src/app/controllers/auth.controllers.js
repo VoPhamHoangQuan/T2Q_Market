@@ -71,19 +71,23 @@ exports.login = async (req, res) => {
 	try {
 		const { email, password } = req.body
 		const user = await userModel.findOne({ email })
-		if (!user) return res.status(400).json({ msg: "Thong tin tai khoan hoac mat khau khong chinh xac" })
+		if (user.deleted === true) {
+			return res.status(400).json({ msg: "Tai khoan da bi xoa hoac khong ton tai vui long lien he admin!" })
+		} else {
+			if (!user) return res.status(400).json({ msg: "Thong tin tai khoan hoac mat khau khong chinh xac" })
 
-		const isMatch = await bcrypt.compare(password, user.password)
-		if (!isMatch) return res.status(400).json({ msg: "Thong tin tai khoan hoac mat khau khong chinh xac" })
+			const isMatch = await bcrypt.compare(password, user.password)
+			if (!isMatch) return res.status(400).json({ msg: "Thong tin tai khoan hoac mat khau khong chinh xac" })
 
-		const refresh_token = createRefreshToken({ id: user._id })
-		res.cookie('refreshtoken', refresh_token, {
-			httpOnly: true,
-			path: '/refresh_token',
-			maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
-		})
+			const refresh_token = createRefreshToken({ id: user._id })
+			res.cookie('refreshtoken', refresh_token, {
+				httpOnly: true,
+				path: '/refresh_token',
+				maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+			})
 
-		res.json({ msg: "Dang nhap thanh cong!" })
+			res.json({ msg: "Dang nhap thanh cong!" })
+		}
 	} catch (err) {
 		return res.status(500).json({ msg: err.message })
 	}

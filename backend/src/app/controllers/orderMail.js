@@ -18,7 +18,7 @@ const oauth2Client = new OAuth2(
 )
 
 // send mail
-const orderMail = (to, orderId, productPurchase, deliveryAddress, total, time, productName) => {
+const orderMail = (to, orderId, productPurchase, deliveryAddress, total, time, productName, tax, shipping, name) => {
     oauth2Client.setCredentials({
         refresh_token: MAILING_SERVICE_REFRESH_TOKEN
     })
@@ -232,12 +232,12 @@ const orderMail = (to, orderId, productPurchase, deliveryAddress, total, time, p
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td class="esd-block-text es-p10b" align="center">
-                                                                                                <h2>Thank You For Your Order!</h2>
+                                                                                                <h2>Thank ${name} For Your Order!</h2>
                                                                                             </td>
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td class="esd-block-text es-p15t es-p20b" align="left">
-                                                                                                <p style="font-size: 16px; color: #777777;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium iste ipsa numquam odio dolores, nam.</p>
+                                                                                                <p style="font-size: 16px; color: #777777;">Thông báo đơn hàng thành công. Cảm ơn bạn đã ủng hộ!</p>
                                                                                             </td>
                                                                                         </tr>
                                                                                     </tbody>
@@ -309,15 +309,15 @@ const orderMail = (to, orderId, productPurchase, deliveryAddress, total, time, p
                                                                                                                 <p>${productName}</p>
                                                                                                             </td>
                                                                                                             <td style="padding: 5px 0" width="20%" align="left">
-                                                                                                                <p>$${productPurchase}</p>
+                                                                                                                <p>${productPurchase}đ</p>
                                                                                                             </td>
                                                                                                         </tr>
                                                                                                         <tr>
                                                                                                             <td style="padding: 5px 10px 5px 0" width="80%" align="left">
-                                                                                                                <p>Shipping + Handling</p>
+                                                                                                                <p>Shipping</p>
                                                                                                             </td>
                                                                                                             <td style="padding: 5px 0" width="20%" align="left">
-                                                                                                                <p>$10.00</p>
+                                                                                                                <p>${shipping}đ</p>
                                                                                                             </td>
                                                                                                         </tr>
                                                                                                         <tr>
@@ -325,7 +325,7 @@ const orderMail = (to, orderId, productPurchase, deliveryAddress, total, time, p
                                                                                                                 <p>Sales Tax</p>
                                                                                                             </td>
                                                                                                             <td style="padding: 5px 0" width="20%" align="left">
-                                                                                                                <p>$5.00</p>
+                                                                                                                <p>${tax}đ</p>
                                                                                                             </td>
                                                                                                         </tr>
                                                                                                     </tbody>

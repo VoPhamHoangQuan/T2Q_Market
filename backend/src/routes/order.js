@@ -6,6 +6,8 @@ const isAuth = require('../middleware/auth.middlewares');
 const isAdmin = require('../middleware/isAdmin')
 const isSellerOrAdmin = require('../middleware/isSellerOrAdmin')
 
+router.patch('/:id', orderController.restore)
+router.get('/deleted', isAuth, isSellerOrAdmin, orderController.getAllDeleted)
 router.get('/summary', isAuth, isAdmin, orderController.getDashboard)
 router.get('/:id', isAuth, orderController.getDetailsOrder)
 router.get('/:id/mine', isAuth, orderController.getOrder)

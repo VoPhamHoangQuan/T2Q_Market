@@ -53,7 +53,7 @@ export default function ProductEditScreen(props) {
         }
     }, [product, dispatch, productId, successUpdate, props.history, auth.user.isSeller]);
 
-    const submitHandler = (e) => {
+    const submitHandler = (e) => {       
         e.preventDefault();
         // TODO: dispatch update product
         dispatch(
