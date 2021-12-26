@@ -99,7 +99,8 @@ class OrderController {
             'user',
             'email name'
         );
-        if (order) {//if have order
+        if (order) {
+            //if have order
             //set info of order
             order.isPaid = true;
             order.paidAt = Date.now();

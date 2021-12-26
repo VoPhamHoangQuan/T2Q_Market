@@ -29,7 +29,7 @@ export default function HomeScreen() {
     }, [dispatch, pageNumber])
     return (
         <div>
-            <h2>Top Sellers</h2>
+            {/* <h2>Top Sellers</h2> */}
             {loadingSellers ? (
                 <LoadingBox></LoadingBox>
             ) : errorSellers ? (
@@ -75,10 +75,7 @@ export default function HomeScreen() {
                                     ))}
                                 </div>
                             </>
-
-                        )
-            }
-
+                        )}
         </div>
     )
 }

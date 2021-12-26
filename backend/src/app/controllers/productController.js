@@ -58,7 +58,6 @@ class ProductController {
             ...categoryFilter,
             ...priceFilter,
             ...ratingFilter,
-            ...idFilter,
             deleted: false,
         })
             .populate('seller', 'seller.name seller.logo')

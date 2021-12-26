@@ -1,0 +1,59 @@
+[{
+  "_id": {
+    "$oid": "61b206878cd33bc01ec53c22"
+  },
+  "orderItems": [
+    {
+      "name": "Đùi gà ",
+      "image": "/uploads\\1639054383202.jpg",
+      "price": 0.25,
+      "quantity": 1,
+      "product": {
+        "$oid": "61b1fbb13903c012423952a6"
+      },
+      "_id": {
+        "$oid": "61b206878cd33bc01ec53c23"
+      }
+    }
+  ],
+  "shippingAddress": {
+    "fullName": "Quan VoPham",
+    "address": "TPHCM",
+    "city": "HoChiMinh",
+    "postalCode": "none",
+    "country": "Vietnam"
+  },
+  "paymentMethod": "PayPal",
+  "itemsPrice": 0.25,
+  "shippingPrice": 10,
+  "taxPrice": 0.04,
+  "totalPrice": 10.29,
+  "user": {
+    "$oid": "61b206728cd33bc01ec53c0d"
+  },
+  "seller": {
+    "$oid": "61b1d283a8da820a79ca7add"
+  },
+  "isPaid": true,
+  "isDelivered": true,
+  "deleted": false,
+  "createdAt": {
+    "$date": "2021-12-09T13:37:11.880Z"
+  },
+  "updatedAt": {
+    "$date": "2021-12-09T13:38:19.346Z"
+  },
+  "__v": 0,
+  "paidAt": {
+    "$date": "2021-12-09T13:37:46.994Z"
+  },
+  "paymentResult": {
+    "id": "0CJ59384AT970530E",
+    "status": "COMPLETED",
+    "update_time": "2021-12-09T13:37:46Z",
+    "email_address": "vophamhoangquan140620@gmail.com"
+  },
+  "deliveredAt": {
+    "$date": "2021-12-09T13:38:19.344Z"
+  }
+}]

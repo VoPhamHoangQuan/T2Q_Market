@@ -49,7 +49,6 @@ import OrderScreen from './Screens/OrderScreen';
 
 
 function App() {
-
   const dispatch = useDispatch()
   const token = useSelector(state => state.token)
   const auth = useSelector(state => state.auth)
@@ -128,8 +127,8 @@ function App() {
   const { isLogged, isAdmin } = auth
   return (
     <BrowserRouter>
-      <div className="grid-container">
-        <header className="row">
+      <div className='grid-container'>
+        <header className={sidebarIsOpen ? 'row opacity' : 'row'}>
           <div>
             <button
               type="button"
@@ -206,7 +205,7 @@ function App() {
         </header>
         <aside className={sidebarIsOpen ? 'open' : ''}>
           <ul className="categories">
-            <li>
+            <li className='sideBar_title'>
               <strong>Categories</strong>
               <button
                 onClick={() => setSidebarIsOpen(false)}
@@ -234,9 +233,11 @@ function App() {
             )}
           </ul>
         </aside>
-        <main>
-          <Route path="/" component={isAdmin?DashboardScreen : HomeScreen} exact></Route>
-          <Route path="/pageNumber/:pageNumber" component={isAdmin?DashboardScreen : HomeScreen} exact></Route>
+
+        <main className={sidebarIsOpen ? 'opacity' : ''}>
+          <Route path="/pageNumber/:pageNumber" component={isAdmin ? DashboardScreen : HomeScreen} exact></Route>
+          <Route path="/" component={HomeScreen} exact></Route>
+          {/* <Route path="/test" component={HomeScreen_test} exact></Route> */}
           {/* user and profile */}
           <Route path="/profile" component={isLogged ? ProfileScreen : Loading} exact></Route>
           <Route path="/userlist" component={isAdmin ? UserListScreen : Loading} exact></Route>
@@ -307,7 +308,7 @@ function App() {
             path="/productlist/seller/pageNumber/:pageNumber"
             component={ProductListScreen}
             exact></Route>
-        </main>
+        </main >
         <footer className="footer-distributed row">
           {auth.user && !isAdmin && <ChatBox userInfo={auth.user} />}
 
@@ -354,7 +355,7 @@ function App() {
 
         </footer>
       </div>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 }
 
