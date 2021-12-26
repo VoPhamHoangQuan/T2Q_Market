@@ -26,7 +26,7 @@ export default function OrderListScreen(props) {
     useEffect(() => {
         dispatch({ type: ORDER_DELETE_RESET });
         dispatch(listOrders({ seller: sellerMode ? auth.user._id : '', order }, token, status));
-    }, [dispatch, successDelete, token, sellerMode, auth.user._id, order]);
+    }, [dispatch, successDelete, token, sellerMode, auth.user._id, order, status]);
 
     const deleteHandler = (order) => {
         if (window.confirm('Are you sure to delete?')) {
@@ -87,7 +87,7 @@ export default function OrderListScreen(props) {
                                 <td>{order._id}</td>
                                 <td>{order.user.name}</td>
                                 <td>{order.createdAt.substring(0, 10)}</td>
-                                <td>{order.totalPrice.toFixed(2)}</td>
+                                <td>{order.totalPrice.toFixed(3)}</td>
                                 <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
                                 <td>
                                     {order.isDelivered

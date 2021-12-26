@@ -15,7 +15,6 @@ export default function ProfileScreen() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [sellerName, setSellerName] = useState('');
     const [sellerLogo, setSellerLogo] = useState('');
-    const [image, setImage] = useState('');
     const [sellerDescription, setSellerDescription] = useState('');
     const token = useSelector(state => state.token)
     const auth = useSelector(state => state.auth)

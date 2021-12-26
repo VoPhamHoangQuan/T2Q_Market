@@ -52,7 +52,7 @@ export default function DashboardScreen() {
               </div>
               <div className="summary-body">               
                 {summary.orders[0]
-                  ? summary.orders[0].totalSales.toFixed(2)
+                  ? summary.orders[0].totalSales.toFixed(3)
                   : 0}đ
               </div>
             </li>

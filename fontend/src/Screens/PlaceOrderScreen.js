@@ -18,7 +18,7 @@ export default function PlaceOrderScreen(props) {
     }
     const orderCreate = useSelector(state => state.orderCreate);
     const { loading, success, error, order } = orderCreate;
-    const toPrice = (num) => Number(num.toFixed(2));
+    const toPrice = (num) => Number(num.toFixed(3));
     cart.itemsPrice = toPrice(cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0));
     cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
     cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
@@ -100,25 +100,25 @@ export default function PlaceOrderScreen(props) {
                             <li>
                                 <div className="row">
                                     <div>Items</div>
-                                    <div>${cart.itemsPrice.toFixed(2)}</div>
+                                    <div>${cart.itemsPrice.toFixed(3)}</div>
                                 </div>
                             </li>
                             <li>
                                 <div className="row">
                                     <div>Shipping</div>
-                                    <div>${cart.shippingPrice.toFixed(2)}</div>
+                                    <div>${cart.shippingPrice.toFixed(3)}</div>
                                 </div>
                             </li>
                             <li>
                                 <div className="row">
                                     <div>Tax</div>
-                                    <div>${cart.taxPrice.toFixed(2)}</div>
+                                    <div>${cart.taxPrice.toFixed(3)}</div>
                                 </div>
                             </li>
                             <li>
                                 <div className="row">
                                     <div><strong>Total Price</strong></div>
-                                    <div><strong>${cart.totalPrice.toFixed(2)}</strong></div>
+                                    <div><strong>${cart.totalPrice.toFixed(3)}</strong></div>
                                 </div>
                             </li>
                             <li>

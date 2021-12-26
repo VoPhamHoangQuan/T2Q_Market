@@ -725,37 +725,6 @@ p.legend{
 }
 
 
-/* Carousel */
-
-.carousel-root {
-  position: relative;
-  width: 74%;
-  left: 22rem;
-}
-
-.carousel .slider-wrapper {
-  background-image: linear-gradient(#203040, #304e6e, #32689e) !important;
-  width: 100% !important;
-}
-
-.carousel .legend {
-  width: 30rem !important;
-  height: 10rem;
-  margin-left: -150px !important;
-  padding: 0 !important;
-  bottom: -60px !important;
-  background: #dea714 !important;
-  font-size: 20px !important;
-}
-
-.carousel .legend:hover .carousel .slide img {
-  opacity: 0.2;
-}
-
-.carousel .slide img {
-  max-width: 30rem;
-}
-
 
 
 /* Search */
@@ -850,10 +819,6 @@ p.legend{
   background-color: #e0e0f0;
 }
 
-/* Carousel */
-.carousel .slide img {
-  max-width: 30rem;
-}
 
 /* Search */
 .search button {

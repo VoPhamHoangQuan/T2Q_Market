@@ -5,7 +5,6 @@ import {  useSelector } from 'react-redux';
 export default function SearchBox(props) {
     const auth = useSelector(state => state.auth)
     const orders = useSelector(state => state.orderList.orders)
-    const products = useSelector(state => state.productList.products)
     const [name, setName] = useState('');
     const [id, setId] = useState('');
     const submitHandlerSearchIdOrder = (e) => {
@@ -14,15 +13,6 @@ export default function SearchBox(props) {
         for (const order of orders) {
             if (order._id === id) {
                 props.history.push(`/order/${id}`)
-            }
-        }
-    } 
-    const submitHandlerSearchProducts = (e) => {
-        document.querySelector('#id').value = ''
-        e.preventDefault();
-        for (const product of products) {
-            if (product._id === id) {
-                props.history.push(`/productlist/id/${id}`)
             }
         }
     } 

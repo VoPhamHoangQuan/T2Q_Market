@@ -146,25 +146,25 @@ export default function OrderScreen(props) {
                                     <li>
                                         <div className="row">
                                             <div>Items</div>
-                                            <div>{order.itemsPrice.toFixed(2)}đ</div>
+                                            <div>{order.itemsPrice.toFixed(3)}đ</div>
                                         </div>
                                     </li>
                                     <li>
                                         <div className="row">
                                             <div>Shipping</div>
-                                            <div>{order.shippingPrice.toFixed(2)}đ</div>
+                                            <div>{order.shippingPrice.toFixed(3)}đ</div>
                                         </div>
                                     </li>
                                     <li>
                                         <div className="row">
                                             <div>Tax</div>
-                                            <div>{order.taxPrice.toFixed(2)}đ</div>
+                                            <div>{order.taxPrice.toFixed(3)}đ</div>
                                         </div>
                                     </li>
                                     <li>
                                         <div className="row">
                                             <div><strong>Total Price</strong></div>
-                                            <div><strong>{order.totalPrice.toFixed(2)}đ</strong></div>
+                                            <div><strong>{order.totalPrice.toFixed(3)}đ</strong></div>
                                         </div>
                                     </li>
                                     {

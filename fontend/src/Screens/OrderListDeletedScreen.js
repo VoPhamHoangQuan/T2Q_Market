@@ -59,7 +59,7 @@ export default function OrderListScreen(props) {
 
                 <Link to="/orderlist">
                     <button type="button" className="primary del_btn bold_white">
-                        <i class="fas fa-list margin-right"></i>
+                        <i className="fas fa-list margin-right"></i>
                         Danh sách đơn hàng
                     </button>
                 </Link>
@@ -90,7 +90,7 @@ export default function OrderListScreen(props) {
                                 <td>{order.user.name}</td>
                                 <td>{order.createdAt.substring(0, 10)}</td>
                                 <td>{[order.orderItems[0].name]}</td>
-                                <td>{order.totalPrice.toFixed(2)}</td>
+                                <td>{order.totalPrice.toFixed(3)}</td>
                                 <td>{order.isPaid ? order.paidAt.substring(0, 10) : 'No'}</td>
                                 <td>
                                     {order.isDelivered
@@ -103,7 +103,7 @@ export default function OrderListScreen(props) {
                                         className="small editbtn"
                                         onClick={() => restoreHandle(order)}
                                     >
-                                        <i class="fas fa-undo margin-right"></i>
+                                        <i className="fas fa-undo margin-right"></i>
                                         Restore
                                     </button>
                                 </td>

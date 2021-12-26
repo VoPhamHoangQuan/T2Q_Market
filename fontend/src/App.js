@@ -236,7 +236,7 @@ function App() {
 
         <main className={sidebarIsOpen ? 'opacity' : ''}>
           <Route path="/pageNumber/:pageNumber" component={isAdmin ? DashboardScreen : HomeScreen} exact></Route>
-          <Route path="/" component={HomeScreen} exact></Route>
+          <Route path="/" component={isAdmin ? DashboardScreen : HomeScreen} exact></Route>
           {/* <Route path="/test" component={HomeScreen_test} exact></Route> */}
           {/* user and profile */}
           <Route path="/profile" component={isLogged ? ProfileScreen : Loading} exact></Route>
@@ -312,16 +312,16 @@ function App() {
         <footer className="footer-distributed row">
           {auth.user && !isAdmin && <ChatBox userInfo={auth.user} />}
 
-          <div class="footer-left white">
+          <div className="footer-left white">
             <h3>T2Q Market - Gì cũng có, mua hết với T2Q Market</h3>
             <div className='margin-top'>
-              <a class="footer-company-name " href="#" >Mua sắm - Buôn bán đơn giản an toàn</a>
+              <a className="footer-company-name " href="#" >Mua sắm - Buôn bán đơn giản an toàn</a>
             </div>
             <div className='margin-top white'>
-              <a class="footer-company-name" href="#" >Hàng hiệu giá tốt tại T2Q Market</a>
+              <a className="footer-company-name" href="#" >Hàng hiệu giá tốt tại T2Q Market</a>
             </div>
           </div>
-          <div class="footer-center">
+          <div className="footer-center">
             <div>
               <img src="https://i.imgur.com/uTM7Zp1.png" className='margin-right' alt="Mail icon" width="30" height="30"></img>
               <p>1 Võ Văn Ngân, TpHCM, Việt Nam</p>
@@ -332,20 +332,20 @@ function App() {
             </div>
             <div>
               <img src="https://i.imgur.com/B0FKkga.png" className='margin-right white' alt="Mail icon" width="30" height="30"></img>
-              <a class="mail_to white" href={`mailto:toanpham0224@gmail.com`}>Liên hệ với chúng tôi</a>
+              <a className="mail_to white" href={`mailto:toanpham0224@gmail.com`}>Liên hệ với chúng tôi</a>
             </div>
           </div>
-          <div class="footer-right">
+          <div className="footer-right">
             <p>
-              <a class="mail_to">Giới thiệu về T2Q Market</a>
+              <a className="mail_to">Giới thiệu về T2Q Market</a>
             </p>
-            <div class="footer-icons">
+            <div className="footer-icons">
               <img src="https://i.imgur.com/PX7Mwff.png" className='margin-right' alt="Facebook icon" width="30" height="30"></img>
               <img src="https://i.imgur.com/DdEfzRX.png" className='margin-right' alt="Instagram icon" width="30" height="30"></img>
               <img src="https://i.imgur.com/SaFAs5i.png" className='margin-right' alt="Git icon" width="30" height="30"></img>
               <img src="https://i.imgur.com/B0FKkga.png" className='margin-right' alt="Mail icon" width="30" height="30"></img>
             </div>
-            <div class="footer-icons">
+            <div className="footer-icons">
               <img src="https://i.imgur.com/jVQVcLd.png" className='margin-right' alt="JCB icon" width="30" height="30"></img>
               <img src="https://i.imgur.com/MMADVAw.png" className='margin-right' alt="Paypal icon" width="30" height="30"></img>
               <img src="https://i.imgur.com/XmZ9NVk.png" className='margin-right' alt="Cash icon" width="30" height="30"></img>
