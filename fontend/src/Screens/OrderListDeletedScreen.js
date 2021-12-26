@@ -44,7 +44,7 @@ export default function OrderListScreen(props) {
             <h1>Orders</h1>
             {loadingRestore && <LoadingBox></LoadingBox>}
             {errorRestore && <MessageBox variant="danger">{errorRestore}</MessageBox>}
-            <div>
+            <div className='title_label'>
                 Sort by{' '}
                 <select
                     value={order}
@@ -55,9 +55,13 @@ export default function OrderListScreen(props) {
                     <option value="new">Newest Orders</option>
                     <option value="old">Oldest Orders</option>
                 </select>
-                <div>
-                    <Link to="/orderlist">Danh sách đơn hàng</Link>
-                </div>
+
+                <Link to="/orderlist">
+                    <button type="button" className="primary del_btn">
+                        Danh sách đơn hàng
+                    </button>
+                </Link>
+
             </div>
             {loading ? (
                 <LoadingBox></LoadingBox>

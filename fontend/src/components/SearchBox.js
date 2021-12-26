@@ -47,7 +47,7 @@ export default function SearchBox(props) {
                     </div>
                 </form>
             }
-            {auth.user.isAdmin && window.location.pathname === '/productlist' && 
+{/*             {auth.user.isAdmin && window.location.pathname === '/productlist' && 
                 <form className="search" onSubmit={ (window.location.pathname === '/productlist' || window.location.pathname === 'productlist/seller') && submitHandlerSearchProducts}>
                     <div className="row">
                         <input
@@ -62,6 +62,7 @@ export default function SearchBox(props) {
                     </div>
                 </form>
             }
+             */}
             {!auth.user.isAdmin &&
                 <form className="search" onSubmit={submitHandler}>
                     <div className="row">
