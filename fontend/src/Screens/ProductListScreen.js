@@ -68,10 +68,11 @@ export default function ProductListScreen(props) {
     return (
         <div>
             <div className="row">
-                <h1>Products</h1>
+                <h1>DANH SÁCH SẢN PHẨM</h1>
                 {auth.user.isSeller && (
-                    <button type="button" className="primary" onClick={createHandler}>
-                        Create New Product
+                    <button type="button" className="primary bold_white" onClick={createHandler}>
+                        <i class="far fa-plus-square margin-right"></i>
+                        SẢN PHẨM MỚI
                     </button>
                 )}
             </div>
@@ -90,12 +91,12 @@ export default function ProductListScreen(props) {
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>NAME</th>
-                                <th>PRICE</th>
-                                <th>CATEGORY</th>
-                                <th>BRAND</th>
-                                <th>AMOUNT</th>
-                                <th>ACTIONS</th>
+                                <th>TÊN SẢN PHẨM</th>
+                                <th>ĐƠN GIÁ</th>
+                                <th>DANH MỤC</th>
+                                <th>THƯƠNG HIỆU</th>
+                                <th>SỐ LƯỢNG</th>
+                                <th>TUỲ CHỌN</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -110,19 +111,21 @@ export default function ProductListScreen(props) {
                                     <td>
                                         <button
                                             type="button"
-                                            className="small"
+                                            className="small editbtn"
                                             onClick={() =>
                                                 props.history.push(`/product/${product._id}/edit`)
                                             }
                                         >
-                                            Edit
+                                            <i class="far fa-edit margin-right"></i>
+                                            Chỉnh sửa
                                         </button>
                                         <button
-                                            type="button"
-                                            className="small"
+                                            type="button "
+                                            className="small Delbtn"
                                             onClick={() => deleteHandler(product)}
                                         >
-                                            Delete
+                                            <i class="far fa-trash-alt margin-right"></i>
+                                            Xoá đơn hàng
                                         </button>
                                     </td>
                                 </tr>

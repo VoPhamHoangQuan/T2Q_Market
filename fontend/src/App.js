@@ -308,9 +308,50 @@ function App() {
             component={ProductListScreen}
             exact></Route>
         </main>
-        <footer className="row center">
+        <footer className="footer-distributed row">
           {auth.user && !isAdmin && <ChatBox userInfo={auth.user} />}
-          <div>All right reserved</div>{' '}
+
+          <div class="footer-left white">
+            <h3>T2Q Market - Gì cũng có, mua hết với T2Q Market</h3>
+            <div className='margin-top'>
+              <a class="footer-company-name " href="#" >Mua sắm - Buôn bán đơn giản an toàn</a>
+            </div>
+            <div className='margin-top white'>
+              <a class="footer-company-name" href="#" >Hàng hiệu giá tốt tại T2Q Market</a>
+            </div>
+          </div>
+          <div class="footer-center">
+            <div>
+              <img src="https://i.imgur.com/uTM7Zp1.png" className='margin-right' alt="Mail icon" width="30" height="30"></img>
+              <p>1 Võ Văn Ngân, TpHCM, Việt Nam</p>
+            </div>
+            <div>
+              <img src="https://i.imgur.com/t4A1GTj.png" className='margin-right' alt="Mail icon" width="30" height="30"></img>
+              <p>+84 935 824 964</p>
+            </div>
+            <div>
+              <img src="https://i.imgur.com/B0FKkga.png" className='margin-right white' alt="Mail icon" width="30" height="30"></img>
+              <a class="mail_to white" href={`mailto:toanpham0224@gmail.com`}>Liên hệ với chúng tôi</a>
+            </div>
+          </div>
+          <div class="footer-right">
+            <p>
+              <a class="mail_to">Giới thiệu về T2Q Market</a>
+            </p>
+            <div class="footer-icons">
+              <img src="https://i.imgur.com/PX7Mwff.png" className='margin-right' alt="Facebook icon" width="30" height="30"></img>
+              <img src="https://i.imgur.com/DdEfzRX.png" className='margin-right' alt="Instagram icon" width="30" height="30"></img>
+              <img src="https://i.imgur.com/SaFAs5i.png" className='margin-right' alt="Git icon" width="30" height="30"></img>
+              <img src="https://i.imgur.com/B0FKkga.png" className='margin-right' alt="Mail icon" width="30" height="30"></img>
+            </div>
+            <div class="footer-icons">
+              <img src="https://i.imgur.com/jVQVcLd.png" className='margin-right' alt="JCB icon" width="30" height="30"></img>
+              <img src="https://i.imgur.com/MMADVAw.png" className='margin-right' alt="Paypal icon" width="30" height="30"></img>
+              <img src="https://i.imgur.com/XmZ9NVk.png" className='margin-right' alt="Cash icon" width="30" height="30"></img>
+              <img src="https://i.imgur.com/5U7yg2e.png" className='margin-right' alt="Visa icon" width="30" height="30"></img>
+            </div>
+          </div>
+
         </footer>
       </div>
     </BrowserRouter>

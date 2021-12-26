@@ -44,20 +44,25 @@ export default function OrderListScreen(props) {
             <h1>Orders</h1>
             {loadingRestore && <LoadingBox></LoadingBox>}
             {errorRestore && <MessageBox variant="danger">{errorRestore}</MessageBox>}
-            <div>
-                Sort by{' '}
+            <div className='title_label'>
+                Sắp xếp theo{' '}
                 <select
                     value={order}
                     onChange={(e) => {
                         props.history.push(getFilterUrl({ order: e.target.value }));
                     }}
                 >
-                    <option value="new">Newest Orders</option>
-                    <option value="old">Oldest Orders</option>
+                    <option value="new">Đơn hàng mới nhẩts</option>
+                    <option value="old">Đơn hang cũ nhất</option>
                 </select>
-                <div>
-                    <Link to="/orderlist">Danh sách đơn hàng</Link>
-                </div>
+
+                <Link to="/orderlist">
+                    <button type="button" className="primary del_btn bold_white">
+                        <i class="fas fa-list margin-right"></i>
+                        Danh sách đơn hàng
+                    </button>
+                </Link>
+
             </div>
             {loading ? (
                 <LoadingBox></LoadingBox>
@@ -68,13 +73,13 @@ export default function OrderListScreen(props) {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>USER</th>
-                            <th>DATE</th>
-                            <th>PRODUCT</th>
-                            <th>TOTAL</th>
-                            <th>PAID</th>
-                            <th>DELIVERED</th>
-                            <th>ACTIONS</th>
+                            <th>NGƯỜI MUA</th>
+                            <th>NGÀY TẠO</th>
+                            <th>SẢN PHẨM</th>
+                            <th>TỔNG TIỀN</th>
+                            <th>NGÀY THANH TOÁN</th>
+                            <th>CHUYỂN HÀNG</th>
+                            <th>TUỲ CHỌN</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -94,9 +99,10 @@ export default function OrderListScreen(props) {
                                 <td>
                                     <button
                                         type="button"
-                                        className="small"
+                                        className="small editbtn"
                                         onClick={() => restoreHandle(order)}
                                     >
+                                        <i class="fas fa-undo margin-right"></i>
                                         Restore
                                     </button>
                                 </td>

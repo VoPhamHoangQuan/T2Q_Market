@@ -41,21 +41,28 @@ export default function OrderListScreen(props) {
 
     return (
         <div>
-            <h1>Orders</h1>
+            <h1>DANH SÁCH ĐƠN HÀNG</h1>
             {loadingDelete && <LoadingBox></LoadingBox>}
             {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
-            <div>
-                Sort by{' '}
+            <div className='title_label'>
+                Sắp xếp theo{' '}
                 <select
                     value={order}
                     onChange={(e) => {
                         props.history.push(getFilterUrl({ order: e.target.value }));
                     }}
                 >
-                    <option value="new">Newest Orders</option>
-                    <option value="old">Oldest Orders</option>
+                    <option value="new">Đơn hàng mới nhất</option>
+                    <option value="old">Đơn hàng cũ nhất</option>
                 </select>
-                <Link to ="/orderlist/deleted" >Thùng rác</Link>
+
+
+                <Link to="/orderlist/deleted" >
+                    <button type="button" className="primary del_btn bold_white">
+                        <i class="far fa-trash-alt margin-right"></i>
+                        Đơn hàng đã xoá
+                    </button>
+                </Link>
             </div>
             {loading ? (
                 <LoadingBox></LoadingBox>
@@ -66,12 +73,12 @@ export default function OrderListScreen(props) {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>USER</th>
-                            <th>DATE</th>
-                            <th>TOTAL</th>
-                            <th>PAID</th>
-                            <th>DELIVERED</th>
-                            <th>ACTIONS</th>
+                            <th>NGƯỜI MUA</th>
+                            <th>NGÀY TẠO</th>
+                            <th>TỔNG</th>
+                            <th>NGÀY THANH TOÁN</th>
+                            <th>CHUYỂN HÀNG</th>
+                            <th>TUỲ CHỌN</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -90,19 +97,21 @@ export default function OrderListScreen(props) {
                                 <td>
                                     <button
                                         type="button"
-                                        className="small"
+                                        className="small editbtn"
                                         onClick={() => {
                                             props.history.push(`/order/${order._id}`);
                                         }}
                                     >
-                                        Details
+                                        <i class="fas fa-info margin-right"></i>
+                                        Chi tiết
                                     </button>
                                     <button
                                         type="button"
-                                        className="small"
+                                        className="small Delbtn"
                                         onClick={() => deleteHandler(order)}
                                     >
-                                        Delete
+                                        <i class="far fa-trash-alt margin-right"></i>
+                                        Xoá đơn hàng
                                     </button>
                                 </td>
                             </tr>
