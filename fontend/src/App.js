@@ -235,8 +235,8 @@ function App() {
           </ul>
         </aside>
         <main>
-          <Route path="/" component={HomeScreen} exact></Route>
-          <Route path="/pageNumber/:pageNumber" component={HomeScreen} exact></Route>
+          <Route path="/" component={isAdmin?DashboardScreen : HomeScreen} exact></Route>
+          <Route path="/pageNumber/:pageNumber" component={isAdmin?DashboardScreen : HomeScreen} exact></Route>
           {/* user and profile */}
           <Route path="/profile" component={isLogged ? ProfileScreen : Loading} exact></Route>
           <Route path="/userlist" component={isAdmin ? UserListScreen : Loading} exact></Route>

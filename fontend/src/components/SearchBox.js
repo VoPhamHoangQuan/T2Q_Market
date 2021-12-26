@@ -46,22 +46,7 @@ export default function SearchBox(props) {
                         </button>
                     </div>
                 </form>
-            }
-            {auth.user.isAdmin && window.location.pathname === '/productlist' && 
-                <form className="search" onSubmit={ (window.location.pathname === '/productlist' || window.location.pathname === 'productlist/seller') && submitHandlerSearchProducts}>
-                    <div className="row">
-                        <input
-                            type="text"
-                            name="id"
-                            id="q"
-                            onChange={(e) => setId(e.target.value)}
-                        ></input>
-                        <button className="primary" type="submit">
-                            <i className="fa fa-search"></i>
-                        </button>
-                    </div>
-                </form>
-            }
+            }          
             {!auth.user.isAdmin &&
                 <form className="search" onSubmit={submitHandler}>
                     <div className="row">
