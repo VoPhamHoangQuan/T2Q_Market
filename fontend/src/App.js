@@ -125,6 +125,9 @@ function App() {
     }
   }, [token, dispatch])
   const { isLogged, isAdmin } = auth
+  const supportHandler = () => {
+    window.location.href = "/support";
+  }
   return (
     <BrowserRouter>
       <div className='grid-container'>
@@ -193,14 +196,21 @@ function App() {
               </div>
             )}
 
-            <Link to="/cart">
-              <i className="fas fa-shopping-cart fa-2x"></i>
-              {
-                cartItems.length > 0 && (
-                  <span className="badge">{cartItems.length}</span>
-                )
-              }
-            </Link>
+            {
+              isAdmin ? (
+                <button type="button" onClick={supportHandler}>
+
+                  <img src="https://i.imgur.com/kun7baY.png" alt="Chat icon" width="30" height="30"></img>
+
+                </button>
+              ) : (<Link to="/cart">
+                <i className="fas fa-shopping-cart fa-2x"></i>
+                {
+                  cartItems.length > 0 && (
+                    <span className="badge">{cartItems.length}</span>
+                  )
+                }
+              </Link>)}
           </div>
         </header>
         <aside className={sidebarIsOpen ? 'open' : ''}>
