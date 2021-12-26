@@ -50,11 +50,10 @@ export default function DashboardScreen() {
                   <i className="fa fa-money" /> Doanh số
                 </span>
               </div>
-              <div className="summary-body">
-                $
+              <div className="summary-body">               
                 {summary.orders[0]
                   ? summary.orders[0].totalSales.toFixed(2)
-                  : 0}
+                  : 0}đ
               </div>
             </li>
           </ul>

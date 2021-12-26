@@ -125,7 +125,7 @@ export default function ProductListScreen(props) {
                                             onClick={() => deleteHandler(product)}
                                         >
                                             <i class="far fa-trash-alt margin-right"></i>
-                                            Xoá đơn hàng
+                                            Xoá sản phẩm
                                         </button>
                                     </td>
                                 </tr>

@@ -52,8 +52,9 @@ export default function OrderListScreen(props) {
                         props.history.push(getFilterUrl({ order: e.target.value }));
                     }}
                 >
-                    <option value="new">Đơn hàng mới nhẩts</option>
-                    <option value="old">Đơn hang cũ nhất</option>
+                    <option value="new">Đơn hàng mới nhất</option>
+                    <option value="old">Đơn hàng cũ nhất</option>
+                    <option>Đơn hàng chưa vận chuyển</option>
                 </select>
 
                 <Link to="/orderlist">
