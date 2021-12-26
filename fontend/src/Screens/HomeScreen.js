@@ -13,17 +13,6 @@ export default function HomeScreen() {
     const dispatch = useDispatch();
     const productList = useSelector(state => state.productList);
     const { loading, error, products } = productList;
-    // const [page, setPage] = useState(1)
-    // const prevPage = () => {
-    //     const pg = page - 1;
-    //     dispatch(listProducts({}))
-    //     setPage(pg)
-    // }
-    // const nextPage = () => {
-    //     const pg = page + 1;
-    //     dispatch(listProducts(pg))
-    //     setPage(pg)
-    // }
 
     const userTopSellersList = useSelector((state) => state.userTopSellersList);
     const {
@@ -38,7 +27,7 @@ export default function HomeScreen() {
     }, [dispatch])
     return (
         <div>
-            <h2>Top Sellers</h2>
+            {/* <h2>Top Sellers</h2> */}
             {loadingSellers ? (
                 <LoadingBox></LoadingBox>
             ) : errorSellers ? (

@@ -19,7 +19,7 @@ class OrderController {
 
     //route to return order of current user
     async getOrder(req, res) {
-        const orders = await orderModel.find({ user: req.params.id });
+        const orders = await orderModel.find({ user: req.params.id, deleted: false })
         res.send(orders);
     }
 
@@ -64,7 +64,8 @@ class OrderController {
             'user',
             'email name'
         );
-        if (order) {//if have order
+        if (order) {
+            //if have order
             //set info of order
             order.isPaid = true;
             order.paidAt = Date.now();
@@ -78,12 +79,16 @@ class OrderController {
             const updatedOrder = await order.save();//update info
             for (let i = 0; i < order.orderItems.length; i++) {
                 var product = await productModel.findById(order.orderItems[i].product)
-                if(product) {
+                if (product) {
                     product.amount = product.amount - order.orderItems[i].quantity
                 }
                 await product.save()
             }
-            orderMail(order.user.email, order._id, order.orderItems[0].price, order.shippingAddress.address, order.orderItems[0].price + 15, req.body.update_time, order.orderItems[0].name)
+            orderMail(
+                order.user.email, order._id, order.orderItems[0].price,
+                order.shippingAddress.address, order.orderItems[0].price + 15,
+                req.body.update_time, order.orderItems[0].name
+            )
 
             res.send({ message: 'Order Paid', order: updatedOrder });
         } else {

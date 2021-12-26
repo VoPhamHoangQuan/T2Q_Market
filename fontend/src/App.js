@@ -48,7 +48,6 @@ import OrderScreen from './Screens/OrderScreen';
 
 
 function App() {
-
   const dispatch = useDispatch()
   const token = useSelector(state => state.token)
   const auth = useSelector(state => state.auth)
@@ -93,6 +92,7 @@ function App() {
           </Link>
           <ul className="dropdown-content user">
             <li><Link to="/profile">Profile</Link></li>
+            <li><Link to="/orderhistory">Order History</Link></li>
             <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
           </ul>
         </div>
@@ -126,8 +126,8 @@ function App() {
   const { isLogged, isAdmin } = auth
   return (
     <BrowserRouter>
-      <div className="grid-container">
-        <header className="row">
+      <div className='grid-container'>
+        <header className={sidebarIsOpen ? 'row opacity'  : 'row'}>
           <div>
             <button
               type="button"
@@ -157,15 +157,15 @@ function App() {
                 <Link to="#admin">
                   Seller <i className="fa fa-caret-down"></i>
                 </Link>
-                  <ul className="dropdown-content seller">
-                    <li>
-                      <Link to="/productlist/seller">Products</Link>
-                    </li>
-                    <li>
-                      <Link to="/orderlist/seller">Orders</Link>
-                    </li>
-                  </ul>
-                </div>
+                <ul className="dropdown-content seller">
+                  <li>
+                    <Link to="/productlist/seller">Products</Link>
+                  </li>
+                  <li>
+                    <Link to="/orderlist/seller">Orders</Link>
+                  </li>
+                </ul>
+              </div>
             )}
             {isLogged && isAdmin && (
               <div className="dropdown">
@@ -193,7 +193,7 @@ function App() {
             )}
 
             <Link to="/cart">
-              <i class="fas fa-shopping-cart fa-2x"></i>
+              <i className="fas fa-shopping-cart fa-2x"></i>
               {
                 cartItems.length > 0 && (
                   <span className="badge">{cartItems.length}</span>
@@ -202,9 +202,9 @@ function App() {
             </Link>
           </div>
         </header>
-        <aside className={sidebarIsOpen ? 'open' : ''}>
+        <aside className={sidebarIsOpen ? 'open'  : ''}>
           <ul className="categories">
-            <li>
+            <li className='sideBar_title'>
               <strong>Categories</strong>
               <button
                 onClick={() => setSidebarIsOpen(false)}
@@ -232,10 +232,11 @@ function App() {
             )}
           </ul>
         </aside>
-        <main>
+        <main className={sidebarIsOpen ? 'opacity'  : ''}>
 
           <Route path="/pageNumber/:pageNumber" component={HomeScreen} exact></Route>
           <Route path="/" component={HomeScreen} exact></Route>
+          {/* <Route path="/test" component={HomeScreen_test} exact></Route> */}
           {/* user and profile */}
           <Route path="/profile" component={isLogged ? ProfileScreen : Loading} exact></Route>
           <Route path="/userlist" component={isAdmin ? UserListScreen : Loading} exact></Route>
@@ -303,7 +304,7 @@ function App() {
             component={ProductListScreen}
             exact></Route>
         </main>
-        <footer className="row center">
+        <footer className={sidebarIsOpen ? 'row center opacity'  : 'row center'}>
           {auth.user && !isAdmin && <ChatBox userInfo={auth.user} />}
           <div>All right reserved</div>{' '}
         </footer>
