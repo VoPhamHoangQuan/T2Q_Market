@@ -45,15 +45,15 @@ export default function OrderListScreen(props) {
             {loadingRestore && <LoadingBox></LoadingBox>}
             {errorRestore && <MessageBox variant="danger">{errorRestore}</MessageBox>}
             <div className='title_label'>
-                Sort by{' '}
+                Sắp xếp theo{' '}
                 <select
                     value={order}
                     onChange={(e) => {
                         props.history.push(getFilterUrl({ order: e.target.value }));
                     }}
                 >
-                    <option value="new">Newest Orders</option>
-                    <option value="old">Oldest Orders</option>
+                    <option value="new">Đơn hàng mới nhẩts</option>
+                    <option value="old">Đơn hang cũ nhất</option>
                 </select>
 
                 <Link to="/orderlist">
