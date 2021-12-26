@@ -70,7 +70,7 @@ export default function ProductListScreen(props) {
             <div className="row">
                 <h1>DANH SÁCH SẢN PHẨM</h1>
                 {auth.user.isSeller && (
-                    <button type="button" className="primary" onClick={createHandler}>
+                    <button type="button" className="primary bold_white" onClick={createHandler}>
                         <i class="far fa-plus-square margin-right"></i>
                         SẢN PHẨM MỚI
                     </button>

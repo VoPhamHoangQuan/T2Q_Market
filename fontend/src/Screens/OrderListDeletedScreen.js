@@ -57,7 +57,7 @@ export default function OrderListScreen(props) {
                 </select>
 
                 <Link to="/orderlist">
-                    <button type="button" className="primary del_btn">
+                    <button type="button" className="primary del_btn bold_white">
                         <i class="fas fa-list margin-right"></i>
                         Danh sách đơn hàng
                     </button>

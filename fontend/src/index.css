@@ -979,5 +979,9 @@ footer {
 .white{
   color: #ffffff !important;
 }
+.bold_white{
+  color: #ffffff !important;
+  font-weight: bold;
+}
 
 @import url(./Screens/auth.css);

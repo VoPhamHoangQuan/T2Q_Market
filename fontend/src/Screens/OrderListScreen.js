@@ -58,7 +58,7 @@ export default function OrderListScreen(props) {
 
 
                 <Link to="/orderlist/deleted" >
-                    <button type="button" className="primary del_btn ">
+                    <button type="button" className="primary del_btn bold_white">
                         <i class="far fa-trash-alt margin-right"></i>
                         Đơn hàng đã xoá
                     </button>
