@@ -91,7 +91,7 @@ export default function SupportScreen() {
   const submitHandler = (e) => {
     e.preventDefault();
     if (!messageBody.trim()) {
-      alert('Error. Please type message.');
+      alert('Xảy ra lỗi. Vui lòng soạn tin nhắn.');
     } else {
       allMessages = [
         ...allMessages,
@@ -114,7 +114,7 @@ export default function SupportScreen() {
     <div className="row top full-container">
       <div className="col-1 support-users">
         {users.filter((x) => x._id !== userInfo._id).length === 0 && (
-          <MessageBox>No Online User Found</MessageBox>
+          <MessageBox>Không có người dùng trực tuyến</MessageBox>
         )}
         <ul>
           {users
@@ -142,14 +142,14 @@ export default function SupportScreen() {
       </div>
       <div className="col-3 support-messages">
         {!selectedUser._id ? (
-          <MessageBox>Select a user to start chat</MessageBox>
+          <MessageBox>Chọn một người dùng để bắt đầu</MessageBox>
         ) : (
           <div>
             <div className="row">
               <strong>Chat with {selectedUser.name} </strong>
             </div>
             <ul ref={uiMessagesRef}>
-              {messages.length === 0 && <li>No message.</li>}
+              {messages.length === 0 && <li>Chưa có tin nhắn.</li>}
               {messages.map((msg, index) => (
                 <li key={index}>
                   <strong>{`${msg.name}: `}</strong> {msg.body}
@@ -162,9 +162,9 @@ export default function SupportScreen() {
                   value={messageBody}
                   onChange={(e) => setMessageBody(e.target.value)}
                   type="text"
-                  placeholder="type message"
+                  placeholder="Soạn tin nhắn"
                 />
-                <button type="submit">Send</button>
+                <button type="submit">Gửi</button>
               </form>
             </div>
           </div>

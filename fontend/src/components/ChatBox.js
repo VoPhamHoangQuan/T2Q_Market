@@ -13,7 +13,7 @@ export default function ChatBox(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [messageBody, setMessageBody] = useState('');
   const [messages, setMessages] = useState([
-    { name: 'Admin', body: 'Hello there, Please ask your question.' },
+    { name: 'Quản trị viên', body: 'Chào mừng đến với T2Q Market, vui lòng gửi câu hỏi của bạn.' },
   ]);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function ChatBox(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     if (!messageBody.trim()) {
-      alert('Error. Please type message.');
+      alert('Xảy ra lỗi. Vui lòng nhập tin nhắn.');
     } else {
       setMessages([...messages, { body: messageBody, name: userInfo.name }]);
       setMessageBody('');
@@ -66,12 +66,14 @@ export default function ChatBox(props) {
     <div className="chatbox">
       {!isOpen ? (
         <button type="button" onClick={supportHandler}>
-          <i className="fa fa-support" />
+          
+          <img src="https://i.imgur.com/kun7baY.png" alt="Chat icon" width="30" height="30"></img>
+          
         </button>
       ) : (
         <div className="card card-body">
           <div className="row">
-            <strong>Support </strong>
+            <strong>Hỗ trợ </strong>
             <button type="button" onClick={closeHandler}>
               <i className="fa fa-close" />
             </button>
@@ -89,7 +91,7 @@ export default function ChatBox(props) {
                 value={messageBody}
                 onChange={(e) => setMessageBody(e.target.value)}
                 type="text"
-                placeholder="type message"
+                placeholder="Soạn tin nhắn"
               />
               <button type="submit">Send</button>
             </form>

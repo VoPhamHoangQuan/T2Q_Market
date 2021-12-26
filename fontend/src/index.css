@@ -376,6 +376,7 @@ img.large {
   font-size: 15px;
   color: #808080;
   line-height: 1.4;
+  padding: 10px;
 
 }
 .table th {
@@ -841,7 +842,7 @@ footer {
 }
 
 .footer-distributed .footer-company-name {
-  color: #8f9296;
+  color: #ffffff;
   font-size: 14px;
   font-weight: normal;
   margin-top: 10px;
@@ -957,6 +958,26 @@ footer {
 }
 .title_label{
   margin-bottom: 15px
+}
+.editbtn{
+  background-color: #008CBA;
+  color: #ffff;
+  font-weight: BOLD;
+}
+.Delbtn{
+  background-color: #c94545;
+  color: #ffff;
+  font-weight: BOLD;
+  margin-left: 15px !important;
+}
+.margin-right{
+  margin-right: 10px !important;
+}
+.margin-top{
+  margin-top: 10px;
+}
+.white{
+  color: #ffffff !important;
 }
 
 @import url(./Screens/auth.css);

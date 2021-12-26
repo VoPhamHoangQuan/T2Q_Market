@@ -58,6 +58,7 @@ export default function OrderListScreen(props) {
 
                 <Link to="/orderlist">
                     <button type="button" className="primary del_btn">
+                        <i class="fas fa-list margin-right"></i>
                         Danh sách đơn hàng
                     </button>
                 </Link>
@@ -72,13 +73,13 @@ export default function OrderListScreen(props) {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>USER</th>
-                            <th>DATE</th>
-                            <th>PRODUCT</th>
-                            <th>TOTAL</th>
-                            <th>PAID</th>
-                            <th>DELIVERED</th>
-                            <th>ACTIONS</th>
+                            <th>NGƯỜI MUA</th>
+                            <th>NGÀY TẠO</th>
+                            <th>SẢN PHẨM</th>
+                            <th>TỔNG TIỀN</th>
+                            <th>NGÀY THANH TOÁN</th>
+                            <th>CHUYỂN HÀNG</th>
+                            <th>TUỲ CHỌN</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -98,9 +99,10 @@ export default function OrderListScreen(props) {
                                 <td>
                                     <button
                                         type="button"
-                                        className="small"
+                                        className="small editbtn"
                                         onClick={() => restoreHandle(order)}
                                     >
+                                        <i class="fas fa-undo margin-right"></i>
                                         Restore
                                     </button>
                                 </td>

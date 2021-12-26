@@ -31,7 +31,7 @@ export default function UserListScreen(props) {
     };
     return (
         <div>
-            <h1>Users</h1>
+            <h1>DANH SÁCH TÀI KHOẢN</h1>
             {loadingDelete && <LoadingBox></LoadingBox>}
             {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
             {successDelete && (
@@ -46,11 +46,11 @@ export default function UserListScreen(props) {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>NAME</th>
+                            <th>TÊN</th>
                             <th>EMAIL</th>
-                            <th>IS SELLER</th>
-                            <th>IS ADMIN</th>
-                            <th>ACTIONS</th>
+                            <th>QUYỀN BÁN HÀNG</th>
+                            <th>QUYỀN QUẢN TRỊ</th>
+                            <th>TUỲ CHỌN</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,17 +64,19 @@ export default function UserListScreen(props) {
                                 <td>
                                     <button
                                         type="button"
-                                        className="small"
+                                        className="small editbtn"
                                         onClick={() => props.history.push(`/user/${user._id}/edit`)}
                                     >
-                                        Edit
+                                        <i class="far fa-edit margin-right"></i>
+                                        Chỉnh sửa
                                     </button>
                                     <button
                                         type="button"
-                                        className="small"
+                                        className="small Delbtn"
                                         onClick={() => deleteHandler(user)}
                                     >
-                                        Delete
+                                        <i class="far fa-trash-alt margin-right"></i>
+                                        Xoá tài khoản
                                     </button>
                                 </td>
                             </tr>
