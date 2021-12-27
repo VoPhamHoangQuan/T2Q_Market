@@ -46,6 +46,8 @@ import SearchScreen from './Screens/SearchScreen';
 import MapScreen from './Screens/MapScreen';
 // Seller
 import OrderScreen from './Screens/OrderScreen';
+//logo
+import logo from './vendor/image/logo.png'
 
 
 function App() {
@@ -137,13 +139,16 @@ function App() {
               <button
                 type="button"
                 className="open-sidebar"
+                style={{marginBottom: '5px'}}
                 onClick={() => setSidebarIsOpen(true)}
               >
-                <i className="fa fa-bars"></i>
+                <i className="fa fa-bars fa-sm"></i>
               </button>
             )}
-
-            <Link className="brand" to="/"> T2Q Market </Link>
+            <Link className="brand" to="/"> 
+            <img className='logo' src= "https://i.imgur.com/dliNVAH.png" alt="logo"></img>
+            {/* T2Q Market */}
+             </Link>
           </div>
           <div>
             <Route

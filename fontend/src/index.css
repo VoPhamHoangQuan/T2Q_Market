@@ -137,6 +137,11 @@ a.brand {
   font-weight: bold;
 }
 
+.logo{
+  max-width: 150px;
+  max-height: 40px;
+}
+
 .badge {
   position: relative;
   top: -2rem;
