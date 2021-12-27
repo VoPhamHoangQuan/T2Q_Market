@@ -121,11 +121,12 @@ class ProductController {
         const productId = req.params.id;
         const product = await ProductModel.findById(productId);
         if (product) {
-            if (product.reviews.find((x) => x.name === req.user.name)) {
+            if (product.reviews.find((x) => x.name === req.body.name)) {
                 return res
                     .status(400)
-                    .send({ message: 'You already submitted a review' });
+                    .send({ message: 'Bạn đã gửi nhận xét cho sản phẩm này!' });
             }
+            console.log(req.body.name);
             const review = {
                 name: req.body.name,
                 rating: Number(req.body.rating),
@@ -142,7 +143,7 @@ class ProductController {
                 review: updatedProduct.reviews[updatedProduct.reviews.length - 1],
             });
         } else {
-            res.status(404).send({ message: 'Product Not Found' });
+            res.status(404).send({ message: 'Không tìm thấy sản phẩm' });
         }
     }
 

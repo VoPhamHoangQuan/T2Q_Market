@@ -134,7 +134,7 @@ export default function SearchScreen(props) {
                     to={getFilterUrl({ rating: r.rating })}
                     className={`${r.rating}` === `${rating}` ? 'active' : ''}
                   >
-                    <Rating caption={' & up'} rating={r.rating}></Rating>
+                    <Rating caption={' Trở lên'} rating={r.rating}></Rating>
                   </Link>
                 </li>
               ))}

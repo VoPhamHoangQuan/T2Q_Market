@@ -92,9 +92,9 @@ function App() {
             {user.name} <i className="fas fa-angle-down"></i>
           </Link>
           <ul className="dropdown-content user">
-            <li><Link to="/profile">Thông tin cá nhân</Link></li>
-            <li><Link to="/orderhistory">Danh sách đơn hàng</Link></li>
-            <li><Link to="/" onClick={handleLogout}>Đăng xuất</Link></li>
+            <li><Link to="/profile">Thông Tin Cá Nhân</Link></li>
+            <li><Link to="/orderhistory">Danh Sách Đơn Hàng</Link></li>
+            <li><Link to="/" onClick={handleLogout}>Đăng Xuất</Link></li>
           </ul>
         </div>
       </React.Fragment>
@@ -133,13 +133,16 @@ function App() {
       <div className='grid-container'>
         <header className={sidebarIsOpen ? 'row opacity' : 'row'}>
           <div>
-            <button
-              type="button"
-              className="open-sidebar"
-              onClick={() => setSidebarIsOpen(true)}
-            >
-              <i className="fa fa-bars"></i>
-            </button>
+            {!isAdmin && (
+              <button
+                type="button"
+                className="open-sidebar"
+                onClick={() => setSidebarIsOpen(true)}
+              >
+                <i className="fa fa-bars"></i>
+              </button>
+            )}
+
             <Link className="brand" to="/"> T2Q Market </Link>
           </div>
           <div>
@@ -159,14 +162,14 @@ function App() {
             {isLogged && auth.user.isSeller && (
               <div className="dropdown">
                 <Link to="#admin">
-                  Seller <i className="fa fa-caret-down"></i>
+                  Bán hàng <i className="fa fa-caret-down"></i>
                 </Link>
                 <ul className="dropdown-content seller">
                   <li>
-                    <Link to="/productlist/seller">SẢN PHẨM</Link>
+                    <Link to="/productlist/seller">Sản Phẩm</Link>
                   </li>
                   <li>
-                    <Link to="/orderlist/seller">ĐƠN HÀNG</Link>
+                    <Link to="/orderlist/seller">Đơn Hàng</Link>
                   </li>
                 </ul>
               </div>
@@ -174,23 +177,23 @@ function App() {
             {isLogged && isAdmin && (
               <div className="dropdown">
                 <Link to="#admin">
-                  Admin {' '} <i className="fa fa-caret-down"></i>
+                  Quản lý {' '} <i className="fa fa-caret-down"></i>
                 </Link>
                 <ul className="dropdown-content admin">
                   <li>
-                    <Link to="/dashboard">THỐNG KÊ</Link>
+                    <Link to="/dashboard">Thống Kê</Link>
                   </li>
                   <li>
-                    <Link to="/productlist">SẢN PHẨM</Link>
+                    <Link to="/productlist">Sản Phẩm</Link>
                   </li>
                   <li>
-                    <Link to="/orderlist">ĐƠN HÀNG</Link>
+                    <Link to="/orderlist">Đơn Hàng</Link>
                   </li>
                   <li>
-                    <Link to="/userlist">NGƯỜI DÙNG</Link>
+                    <Link to="/userlist">Người Dùng</Link>
                   </li>
                   <li>
-                    <Link to="/support">HỖ TRỢ KHÁCH HÀNG</Link>
+                    <Link to="/support">Hỗ Trợ Khách Hàng</Link>
                   </li>
                 </ul>
               </div>

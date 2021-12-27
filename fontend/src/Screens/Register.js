@@ -28,16 +28,16 @@ function Register() {
     const handleSubmit = async e => {
         e.preventDefault()
         if(isEmpty(name) || isEmpty(password))
-                return setUser({...user, err: "Please fill in all fields.", success: ''})
+                return setUser({...user, err: "Vui lòng nhập tất cả thông tin cần thiết.", success: ''})
 
         if(!isEmail(email))
-            return setUser({...user, err: "Invalid emails.", success: ''})
+            return setUser({...user, err: "Email không hợp lệ.", success: ''})
 
         if(isLength(password))
-            return setUser({...user, err: "Password must be at least 6 characters.", success: ''})
+            return setUser({...user, err: "Mật khẩu có ít nhất 6 ký tự.", success: ''})
         
         if(!isMatch(password, cf_password))
-            return setUser({...user, err: "Password did not match.", success: ''})
+            return setUser({...user, err: "Mật khẩu không khớp, xin vui lòng kiểm tra lại.", success: ''})
 
         try {
             const res = await axios.post('/register', {

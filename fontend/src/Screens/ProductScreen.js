@@ -52,7 +52,7 @@ export default function ProductScreen(props) {
                 createReview(productId, { rating, comment, name: auth.user.name }, token)
             );
         } else {
-            alert('Please enter comment and rating');
+            alert('Xin mời nhập nhận xét');
         }
     };
 
@@ -108,7 +108,7 @@ export default function ProductScreen(props) {
                                         </li>
                                         <li>
                                             <div className="row">
-                                                <div><strong>GIÁ</strong></div>
+                                                <div><strong>Giá</strong></div>
                                                 <div className="price">{NumberWithCommas(product.price * 23000)} VNĐ</div>
                                             </div>
                                         </li>
@@ -220,7 +220,7 @@ export default function ProductScreen(props) {
                                     </form>
                                 ) : (
                                     <MessageBox>
-                                        Please <Link to="/signin">Sign In</Link> to write a review
+                                        Vui lòng <Link to="/signin">đăng nhập</Link> để nhận xét sản phẩm
                                     </MessageBox>
                                 )}
                             </li>

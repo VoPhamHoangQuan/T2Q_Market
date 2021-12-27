@@ -120,7 +120,7 @@ function Login() {
 
             </div>
 
-            <p>Chưa có tài khoảng? <Link to="/register">Đăng ký</Link></p>
+            <p>Chưa có tài khoản? <Link to="/register">Đăng ký</Link></p>
         </div>
     )
 }

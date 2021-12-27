@@ -71,7 +71,7 @@ export default function MapScreen(props) {
             alert('location selected successfully.');
             props.history.push('/shipping');
         } else {
-            alert('Please enter your address');
+            alert('Xin mời nhập địa chỉ');
         }
     };
 
