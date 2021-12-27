@@ -1,23 +1,23 @@
 export const prices = [
     {
-        name: 'Any',
+        name: 'Tất Cả',
         min: 0,
         max: 0,
     },
     {
-        name: `$1 to $10`,
-        min: 1,
-        max: 10,
+        name: `$1.000 to $10.000`,
+        min: 0.1,
+        max: 0.45,
     },
     {
-        name: `$10 to $100`,
-        min: 10,
-        max: 100,
+        name: `$10.000 to $100.000`,
+        min: 0.45,
+        max: 4.35,
     },
     {
-        name: `$100 to $1000`,
-        min: 100,
-        max: 1000,
+        name: `$100.000 to $1.000.000`,
+        min: 4.35,
+        max: 50,
     },
 ];
 export const ratings = [

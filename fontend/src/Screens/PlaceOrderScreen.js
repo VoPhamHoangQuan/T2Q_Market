@@ -6,6 +6,8 @@ import { createOrder } from '../redux/actions/orderActions.js'
 import { ORDER_CREATE_RESET } from '../redux/constants/orderConstants.js'
 import LoadingBox from '../components/LoadingBox'
 import MessageBox from '../components/MessageBox'
+import NumberWithCommas from '../components/utils/NumberWithCommas/NumberWithCommas.js'
+
 export default function PlaceOrderScreen(props) {
 
     const firstLogin = localStorage.getItem("firstLogin");
@@ -46,10 +48,10 @@ export default function PlaceOrderScreen(props) {
                     <ul>
                         <li>
                             <div className="card card-body">
-                                <h2>Shipping</h2>
+                                <h2>Thông Tin Vận Chuyển</h2>
                                 <p>
-                                    <strong>Name: </strong>{cart.shippingAddress.fullName}<br />
-                                    <strong>Address: </strong>
+                                    <strong>Họ Và Tên: </strong>{cart.shippingAddress.fullName}<br />
+                                    <strong>Địa Chỉ: </strong>
                                     {cart.shippingAddress.address}, {cart.shippingAddress.city},{" "}
                                     {cart.shippingAddress.postalCode}, {cart.shippingAddress.country}
                                 </p>
@@ -57,15 +59,15 @@ export default function PlaceOrderScreen(props) {
                         </li>
                         <li>
                             <div className="card card-body">
-                                <h2>Payment</h2>
+                                <h2>Phương Thức Thanh Toán</h2>
                                 <p>
-                                    <strong>Method: </strong>{cart.paymentMethod}
+                                    <strong>Phương Thức: </strong>{cart.paymentMethod}
                                 </p>
                             </div>
                         </li>
                         <li>
                             <div className="card card-body">
-                                <h2>Order Items</h2>
+                                <h2>Giỏ Hàng</h2>
                                 <ul>
                                     {
                                         cart.cartItems.map(item => (
@@ -81,7 +83,7 @@ export default function PlaceOrderScreen(props) {
                                                     <div className="min-30">
                                                         <Link to={`/product/${item.product}`}>{item.name}</Link>
                                                     </div>
-                                                    <div>{item.quantity} x ${item.price} = ${item.quantity * item.price}</div>
+                                                    <div>{item.quantity} x {NumberWithCommas(item.price*23000)} = {NumberWithCommas(item.quantity * item.price*23000)} VNĐ</div>
                                                 </div>
                                             </li>
                                         ))
@@ -95,30 +97,30 @@ export default function PlaceOrderScreen(props) {
                     <div className="card card-body">
                         <ul>
                             <li>
-                                <h2>Order Summary</h2>
+                                <h2>Chi Tiết Chi Phí</h2>
                             </li>
                             <li>
                                 <div className="row">
-                                    <div>Items</div>
-                                    <div>${cart.itemsPrice.toFixed(3)}</div>
+                                    <div>Sản Phẩm</div>
+                                    <div>{NumberWithCommas(cart.itemsPrice*23000)} VNĐ</div>
                                 </div>
                             </li>
                             <li>
                                 <div className="row">
-                                    <div>Shipping</div>
-                                    <div>${cart.shippingPrice.toFixed(3)}</div>
+                                    <div>Vận Chuyển</div>
+                                    <div>{NumberWithCommas(toPrice(cart.shippingPrice*23000))} VNĐ</div>
                                 </div>
                             </li>
                             <li>
                                 <div className="row">
-                                    <div>Tax</div>
-                                    <div>${cart.taxPrice.toFixed(3)}</div>
+                                    <div>Thuế</div>
+                                    <div>{NumberWithCommas(cart.taxPrice*23000)} VNĐ</div>
                                 </div>
                             </li>
                             <li>
                                 <div className="row">
-                                    <div><strong>Total Price</strong></div>
-                                    <div><strong>${cart.totalPrice.toFixed(3)}</strong></div>
+                                    <div><strong>Tổng Chi Phí</strong></div>
+                                    <div><strong>{NumberWithCommas(toPrice(cart.totalPrice*23000))} VNĐ</strong></div>
                                 </div>
                             </li>
                             <li>
@@ -128,7 +130,7 @@ export default function PlaceOrderScreen(props) {
                                         className="primary block"
                                         onClick={placeOrderHandler}
                                         disabled={cart.cartItems.length === 0 ? true : false}>
-                                        Place Order
+                                        Đặt Hàng
                                     </button>
                                 </div>
                             </li>

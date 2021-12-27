@@ -78,30 +78,30 @@ function Login() {
 
     return (
         <div className="login_page">
-            <h2>Login</h2>
+            <h2>ĐĂNG NHẬP</h2>
             {err && showErrMsg(err)}
             {success && showSuccessMsg(success)}
 
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="email">Email Address</label>
-                    <input type="text" placeholder="Enter email address" id="email"
+                    <label htmlFor="email">ĐỊA CHỈ EMAIL</label>
+                    <input type="text" placeholder="Nhập địa chỉ email" id="email"
                     value={email} name="email" onChange={handleChangeInput} />
                 </div>
 
                 <div>
-                    <label htmlFor="password">Password</label>
-                    <input type="password" placeholder="Enter password" id="password"
+                    <label htmlFor="password">MẬT KHẨU</label>
+                    <input type="password" placeholder="Nhập mật khẩu" id="password"
                     value={password} name="password" onChange={handleChangeInput} />
                 </div>
 
                 <div className="row">
-                    <button  type="submit">Login</button>
-                    <Link to="/forgot_password">Forgot your password?</Link>
+                    <button  type="submit">XÁC NHẬN</button>
+                    <Link to="/forgot_password">Quên mật khẩu?</Link>
                 </div>
             </form>
 
-            <div className="hr">Or Login With</div>
+            <div className="hr">Đăng nhập bằng</div>
 
             <div className="social">
                 <GoogleLogin
@@ -120,7 +120,7 @@ function Login() {
 
             </div>
 
-            <p>New Customer? <Link to="/register">Register</Link></p>
+            <p>Chưa có tài khoảng? <Link to="/register">Đăng ký</Link></p>
         </div>
     )
 }

@@ -65,9 +65,9 @@ export default function ChatBox(props) {
   return (
     <div className="chatbox">
       {!isOpen ? (
-        <button type="button" onClick={supportHandler}>
+        <button className='radius-20' type="button" onClick={supportHandler}>
           
-          <img src="https://i.imgur.com/kun7baY.png" alt="Chat icon" width="30" height="30"></img>
+          <i class="fas fa-headset fa-lg"></i>
           
         </button>
       ) : (

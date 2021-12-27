@@ -1,6 +1,7 @@
 import React from "react";
 import Rating from "./Rating";
 import { Link } from "react-router-dom";
+import NumberWithCommas from './utils/NumberWithCommas/NumberWithCommas.js'
 
 export default function Product(props) {
     const { product } = props
@@ -15,13 +16,11 @@ export default function Product(props) {
                     <h2>{product.name}</h2>
                 </Link>
                 <Rating rating={product.rating} numReviews={product.numReviews}></Rating>
-                <div className="row">
-                    <div className="price">{product.price}đ</div>
-                    <div>
-                        <Link to={`/seller/${product.seller._id}`}>
-                            {product.seller.seller.name}
-                        </Link>
-                    </div>
+                <div className="price">{NumberWithCommas(product.price * 23000)} VNĐ</div>
+                <div>
+                    <Link to={`/seller/${product.seller._id}`}>
+                        {product.seller.seller.name}
+                    </Link>
                 </div>
             </div>
         </div>

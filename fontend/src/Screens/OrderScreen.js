@@ -7,6 +7,8 @@ import MessageBox from '../components/MessageBox'
 import Axios from 'axios'
 import { PayPalButton } from 'react-paypal-button-v2'
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET, } from '../redux/constants/orderConstants.js'
+import NumberWithCommas from '../components/utils/NumberWithCommas/NumberWithCommas.js'
+
 
 export default function OrderScreen(props) {
 
@@ -14,6 +16,7 @@ export default function OrderScreen(props) {
     if (!firstLogin) {
         props.history.push('/signin');
     }
+    const toPrice = (num) => Number(num.toFixed(3));
     const [sdkReady, setSdkReady] = useState(false);
     const orderId = props.match.params.id;
     const orderDetails = useSelector(state => state.orderDetails);
@@ -76,42 +79,41 @@ export default function OrderScreen(props) {
         error ? (<MessageBox variant="danger">{error}</MessageBox>) :
             (
                 <div>
-                    <h1>Order {order._id}</h1>
                     <div className="row top">
                         <div className="col-2">
                             <ul>
                                 <li>
                                     <div className="card card-body">
-                                        <h2>Shipping</h2>
+                                        <h2>Thông Tin Vận Chuyển</h2>
                                         <p>
-                                            <strong>Name: </strong>{order.shippingAddress.fullName}<br />
-                                            <strong>Address: </strong>
+                                            <strong>Họ Và Tên: </strong>{order.shippingAddress.fullName}<br />
+                                            <strong>Địa Chỉ: </strong>
                                             {order.shippingAddress.address}, {order.shippingAddress.city},{" "}
                                             {order.shippingAddress.postalCode}, {order.shippingAddress.country}
                                         </p>
                                         {
                                             order.isDelivered ?
-                                                <MessageBox variant="success">Delivered at {order.deliveredAt}</MessageBox> :
-                                                <MessageBox variant="danger">Not Delivered</MessageBox>
+                                                <MessageBox variant="success">Giao vào Lúc {order.deliveredAt}</MessageBox> :
+                                                <MessageBox variant="danger">Chưa Vận Chuyển</MessageBox>
                                         }
                                     </div>
                                 </li>
                                 <li>
                                     <div className="card card-body">
-                                        <h2>Payment</h2>
+                                        <h2>Phương Thức Thanh Toán</h2>
                                         <p>
-                                            <strong>Method: </strong>{order.paymentMethod}
+                                            <strong>Phương Thức: </strong>{order.paymentMethod}
                                         </p>
                                         {
                                             order.isPaid ?
-                                                <MessageBox variant="success">Paid at {order.paidAt}</MessageBox> :
-                                                <MessageBox variant="danger">Not Paid</MessageBox>
+                                                <MessageBox variant="success">Thanh Toán Lúc {order.paidAt}</MessageBox> :
+                                                <MessageBox variant="danger">Chưa Thanh Toán</MessageBox>
                                         }
                                     </div>
                                 </li>
                                 <li>
                                     <div className="card card-body">
-                                        <h2>Order Items</h2>
+                                        <h2>Giỏ Hàng</h2>
                                         <ul>
                                             {
                                                 order.orderItems.map(item => (
@@ -127,7 +129,7 @@ export default function OrderScreen(props) {
                                                             <div className="min-30">
                                                                 <Link to={`/product/${item.product}`}>{item.name}</Link>
                                                             </div>
-                                                            <div>{item.quantity} x ${item.price} = ${item.quantity * item.price}</div>
+                                                            <div>{item.quantity} x {NumberWithCommas(item.price*23000)} = {NumberWithCommas(item.quantity * item.price*23000)} VNĐ</div>
                                                         </div>
                                                     </li>
                                                 ))
@@ -141,30 +143,30 @@ export default function OrderScreen(props) {
                             <div className="card card-body">
                                 <ul>
                                     <li>
-                                        <h2>Order Summary</h2>
+                                        <h2>Chi Tiết Chi Phí</h2>
                                     </li>
                                     <li>
                                         <div className="row">
-                                            <div>Items</div>
-                                            <div>{order.itemsPrice.toFixed(3)}đ</div>
+                                            <div>Sản Phẩm</div>
+                                            <div>{NumberWithCommas(order.itemsPrice*23000)} VNĐ</div>
                                         </div>
                                     </li>
                                     <li>
                                         <div className="row">
-                                            <div>Shipping</div>
-                                            <div>{order.shippingPrice.toFixed(3)}đ</div>
+                                            <div>Vận Chuyển</div>
+                                            <div>{NumberWithCommas(toPrice(order.shippingPrice*23000))} VNĐ</div>
                                         </div>
                                     </li>
                                     <li>
                                         <div className="row">
-                                            <div>Tax</div>
-                                            <div>{order.taxPrice.toFixed(3)}đ</div>
+                                            <div>Thuế</div>
+                                            <div>{NumberWithCommas(order.taxPrice*23000)} VNĐ</div>
                                         </div>
                                     </li>
                                     <li>
                                         <div className="row">
-                                            <div><strong>Total Price</strong></div>
-                                            <div><strong>{order.totalPrice.toFixed(3)}đ</strong></div>
+                                            <div><strong>Tổng Chi Phí</strong></div>
+                                            <div><strong>{NumberWithCommas(toPrice(order.totalPrice*23000))} VNĐ</strong></div>
                                         </div>
                                     </li>
                                     {
@@ -202,7 +204,7 @@ export default function OrderScreen(props) {
                                                 className="primary block"
                                                 onClick={deliverHandler}
                                             >
-                                                Deliver Order
+                                                Vận Chuyển
                                             </button>
                                         </li>
                                     )}

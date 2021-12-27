@@ -53,41 +53,41 @@ function Register() {
 
     return (
         <div className="login_page">
-            <h2>Register</h2>
+            <h2>ĐĂNG KÝ</h2>
             {err && showErrMsg(err)}
             {success && showSuccessMsg(success)}
 
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="name">Name</label>
-                    <input type="text" placeholder="Enter your name" id="name"
+                    <label htmlFor="name">HỌ VÀ TÊN</label>
+                    <input type="text" placeholder="Nhập họ và tên của bạn" id="name"
                     value={name} name="name" onChange={handleChangeInput} />
                 </div>
 
                 <div>
-                    <label htmlFor="email">Email Address</label>
-                    <input type="text" placeholder="Enter email address" id="email"
+                    <label htmlFor="email">ĐỊA CHỈ EMAIL</label>
+                    <input type="text" placeholder="Nhập địa chỉ email" id="email"
                     value={email} name="email" onChange={handleChangeInput} />
                 </div>
 
                 <div>
-                    <label htmlFor="password">Password</label>
-                    <input type="password" placeholder="Enter password" id="password"
+                    <label htmlFor="password">MẬT KHẨU</label>
+                    <input type="password" placeholder="Nhập mật khẩu" id="password"
                     value={password} name="password" onChange={handleChangeInput} />
                 </div>
 
                 <div>
-                    <label htmlFor="cf_password">Confirm Password</label>
-                    <input type="password" placeholder="Confirm password" id="cf_password"
+                    <label htmlFor="cf_password">XÁC NHẬN MẬT KHẨU</label>
+                    <input type="password" placeholder="Nhập lại mật khẩu" id="cf_password"
                     value={cf_password} name="cf_password" onChange={handleChangeInput} />
                 </div>
 
                 <div className="row">
-                    <button type="submit">Register</button>
+                    <button type="submit">XÁC NHẬN</button>
                 </div>
             </form>
 
-            <p>Already an account? <Link to="/signin">Login</Link></p>
+            <p>Đã có tài khoản? <Link to="/signin">Đăng nhập</Link></p>
         </div>
     )
 }

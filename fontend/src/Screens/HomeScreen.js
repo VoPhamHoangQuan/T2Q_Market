@@ -49,14 +49,14 @@ export default function HomeScreen() {
                     </Carousel>
                 </>
             )}
-            <h2>Featured Products</h2>
             {
                 loading ?
                     <LoadingBox></LoadingBox> :
                     error ?
                         <MessageBox variant='danger'>{error}</MessageBox> :
                         (
-                            <>
+                            <div className='card card-container'>
+                                <h2 className='card-body'>GỢI Ý HÔM NAY</h2>
                                 {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
                                 <div className="row center">
                                     {products.map((product) => (
@@ -74,7 +74,7 @@ export default function HomeScreen() {
                                         </Link>
                                     ))}
                                 </div>
-                            </>
+                            </div>
                         )}
         </div>
     )

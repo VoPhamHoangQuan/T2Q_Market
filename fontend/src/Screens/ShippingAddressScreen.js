@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import CheckoutSteps from '../components/CheckoutSteps'
 import { saveShippingAddress } from '../redux/actions/cartActions';
 
@@ -67,70 +67,73 @@ export default function ShippingAddressScreen(props) {
     return (
         <div>
             <CheckoutSteps step1 step2></CheckoutSteps>
-            <form className='form' onSubmit={submitHandler}>
+            <form className='form card' onSubmit={submitHandler}>
                 <div>
-                    <h1>Shipping Adress</h1>
+                    <h1>Thông Tin Vận Chuyển</h1>
                 </div>
-                <div>
-                    <label htmlFor="fullName">Full Name</label>
-                    <input type="text"
-                        id="fullName"
-                        value={fullName}
-                        placeholder="Enter full name"
-                        onChange={e => setFullName(e.target.value)}
-                        required
-                    ></input>
-                </div>
-                <div>
-                    <label htmlFor="address">Address</label>
-                    <input type="text"
-                        id="address"
-                        value={address}
-                        placeholder="Enter address"
-                        onChange={e => setAddress(e.target.value)}
-                        required
-                    ></input>
-                </div>
-                <div>
-                    <label htmlFor="city">City</label>
-                    <input type="text"
-                        id="city"
-                        value={city}
-                        placeholder="Enter city"
-                        onChange={e => setCity(e.target.value)}
-                        required
-                    ></input>
-                </div>
-                <div>
-                    <label htmlFor="postalCode">Postal Code</label>
-                    <input type="text"
-                        id="postalCode"
-                        value={postalCode}
-                        placeholder="Enter postal code"
-                        onChange={e => setPostalCode(e.target.value)}
-                        required
-                    ></input>
-                </div>
-                <div>
-                    <label htmlFor="country">Country</label>
-                    <input type="text"
-                        id="country"
-                        value={country}
-                        placeholder="Enter country"
-                        onChange={e => setCountry(e.target.value)}
-                        required
-                    ></input>
-                </div>
-                <div>
-                    <label htmlFor="chooseOnMap">Location</label>
-                    <button type="button" onClick={chooseOnMap}>
-                        Choose On Map
-                    </button>
-                </div>
+               
+                    <div>
+                        <label htmlFor="fullName">Họ Và Tên</label>
+                        <input type="text"
+                            id="fullName"
+                            value={fullName}
+                            placeholder="Nhập họ và tên"
+                            onChange={e => setFullName(e.target.value)}
+                            required
+                        ></input>
+                    </div>
+                    <div>
+                        <label htmlFor="address">Địa Chỉ</label>
+                        <input type="text"
+                            id="address"
+                            value={address}
+                            placeholder="Nhập địa chỉ"
+                            onChange={e => setAddress(e.target.value)}
+                            required
+                        ></input>
+                    </div>
+                    <div>
+                        <label htmlFor="city">Thành Phố</label>
+                        <input type="text"
+                            id="city"
+                            value={city}
+                            placeholder="Nhập tên thành phố"
+                            onChange={e => setCity(e.target.value)}
+                            required
+                        ></input>
+                    </div>
+                    <div>
+                        <label htmlFor="postalCode">Postal Code</label>
+                        <input type="text"
+                            id="postalCode"
+                            value={postalCode}
+                            placeholder="Nhập postal code"
+                            onChange={e => setPostalCode(e.target.value)}
+                            required
+                        ></input>
+                    </div>
+                    <div>
+                        <label htmlFor="country">Quốc Gia</label>
+                        <input type="text"
+                            id="country"
+                            value={country}
+                            placeholder="Nhập tên quốc gia"
+                            onChange={e => setCountry(e.target.value)}
+                            required
+                        ></input>
+                    </div>
+                    <div>
+                        <label htmlFor="chooseOnMap">Vị Trí</label>
+                        <button type="button" onClick={chooseOnMap}>
+                            Chọn Vị Trí Trên Bản Đồ
+                        </button>
+                    </div>
+                
+
                 <div>
                     <label />
                     <button className="primary" type="submit">
-                        Continue
+                        Tiếp Tục
                     </button>
                 </div>
             </form>

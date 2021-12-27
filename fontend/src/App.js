@@ -92,9 +92,9 @@ function App() {
             {user.name} <i className="fas fa-angle-down"></i>
           </Link>
           <ul className="dropdown-content user">
-            <li><Link to="/profile">Profile</Link></li>
-            <li><Link to="/orderhistory">Order History</Link></li>
-            <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
+            <li><Link to="/profile">Thông tin cá nhân</Link></li>
+            <li><Link to="/orderhistory">Danh sách đơn hàng</Link></li>
+            <li><Link to="/" onClick={handleLogout}>Đăng xuất</Link></li>
           </ul>
         </div>
       </React.Fragment>
@@ -154,7 +154,7 @@ function App() {
             {
               isLogged
                 ? userLink()
-                : <Link to="/signin"><i className="fas fa-user"></i> Sign in</Link>
+                : <Link to="/signin"><i className="fas fa-user"></i> Đăng Nhập</Link>
             }
             {isLogged && auth.user.isSeller && (
               <div className="dropdown">
@@ -163,10 +163,10 @@ function App() {
                 </Link>
                 <ul className="dropdown-content seller">
                   <li>
-                    <Link to="/productlist/seller">Products</Link>
+                    <Link to="/productlist/seller">SẢN PHẨM</Link>
                   </li>
                   <li>
-                    <Link to="/orderlist/seller">Orders</Link>
+                    <Link to="/orderlist/seller">ĐƠN HÀNG</Link>
                   </li>
                 </ul>
               </div>
@@ -178,19 +178,19 @@ function App() {
                 </Link>
                 <ul className="dropdown-content admin">
                   <li>
-                    <Link to="/dashboard">Dashboard</Link>
+                    <Link to="/dashboard">THỐNG KÊ</Link>
                   </li>
                   <li>
-                    <Link to="/productlist">Products</Link>
+                    <Link to="/productlist">SẢN PHẨM</Link>
                   </li>
                   <li>
-                    <Link to="/orderlist">Orders</Link>
+                    <Link to="/orderlist">ĐƠN HÀNG</Link>
                   </li>
                   <li>
-                    <Link to="/userlist">Users</Link>
+                    <Link to="/userlist">NGƯỜI DÙNG</Link>
                   </li>
                   <li>
-                    <Link to="/support">Support</Link>
+                    <Link to="/support">HỖ TRỢ KHÁCH HÀNG</Link>
                   </li>
                 </ul>
               </div>
@@ -198,10 +198,10 @@ function App() {
 
             {
               isAdmin ? (
-                <button type="button" onClick={supportHandler}>
+                <button className='radius-20' type="button" onClick={supportHandler}>
 
-                  <img src="https://i.imgur.com/kun7baY.png" alt="Chat icon" width="30" height="30"></img>
-
+                  {/* <img src="https://i.imgur.com/kun7baY.png" alt="Chat icon" width="30" height="30"></img> */}
+                  <i class="fas fa-headset fa-lg"></i>
                 </button>
               ) : (<Link to="/cart">
                 <i className="fas fa-shopping-cart fa-2x"></i>
@@ -216,7 +216,7 @@ function App() {
         <aside className={sidebarIsOpen ? 'open' : ''}>
           <ul className="categories">
             <li className='sideBar_title'>
-              <strong>Categories</strong>
+              <strong>LOẠI THỰC PHẨM</strong>
               <button
                 onClick={() => setSidebarIsOpen(false)}
                 className="close-sidebar"

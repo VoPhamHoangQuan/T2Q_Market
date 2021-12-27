@@ -16,7 +16,7 @@ class ProductController {
     }
 
     async getAllProducts(req, res, next) {
-        const pageSize = 8;
+        const pageSize = 12;
         const page = Number(req.query.pageNumber) || 1;
         const name = req.query.name || '';
         const seller = req.query.seller || '';
