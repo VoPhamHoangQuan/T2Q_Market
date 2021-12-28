@@ -46,8 +46,6 @@ import SearchScreen from './Screens/SearchScreen';
 import MapScreen from './Screens/MapScreen';
 // Seller
 import OrderScreen from './Screens/OrderScreen';
-//logo
-import logo from './vendor/image/logo.png'
 
 
 function App() {
@@ -87,8 +85,9 @@ function App() {
       <React.Fragment>
         <div className="dropdown">
           {
-            user.avatar &&
-            (<img className="superSmall image-profile" src={user.avatar} alt={''} />)
+            user.avatar ?
+              (<img className="superSmall image-profile" src={user.avatar} alt={''} />)
+              : (<i class="fas fa-user-circle fa-2x" style={{ color: 'white' }}></i>)
           }
           <Link to="#">
             {user.name} <i className="fas fa-angle-down"></i>
@@ -134,21 +133,26 @@ function App() {
     <BrowserRouter>
       <div className='grid-container'>
         <header className={sidebarIsOpen ? 'row opacity' : 'row'}>
-          <div>
+          <div className='header-nav'>
             {!isAdmin && (
-              <button
-                type="button"
-                className="open-sidebar"
-                style={{marginBottom: '5px'}}
-                onClick={() => setSidebarIsOpen(true)}
-              >
-                <i className="fa fa-bars fa-sm"></i>
-              </button>
+              <div>
+                <button
+                  type="button"
+                  className="open-sidebar"
+                  style={{ marginBottom: '5px' }}
+                  onClick={() => setSidebarIsOpen(true)}
+                >
+                  <i className="fa fa-bars fa-sm"></i>
+                </button>
+              </div>
             )}
-            <Link className="brand" to="/"> 
-            <img className='logo' src= "https://i.imgur.com/dliNVAH.png" alt="logo"></img>
-            {/* T2Q Market */}
-             </Link>
+            <div>
+              <Link to="/">
+              {/* https://i.imgur.com/dliNVAH.png */}
+              
+                <img className='logo' src="https://i.imgur.com/J0IUalL.png" alt="logo"></img>
+              </Link>
+            </div>
           </div>
           <div>
             <Route
