@@ -35,8 +35,8 @@ export default function CartScreen(props) {
                     {error && <MessageBox variant="danger">{error}</MessageBox>}
                     {
                         cartItems.length === 0
-                            ? (<MessageBox>Cart is empty.
-                                <Link to="/">Go to shopping</Link>
+                            ? (<MessageBox>Không có sản phẩm trong giỏ hàng.
+                                <Link to="/">Mua sắm ngay</Link>
                             </MessageBox>)
                             :
                             (
@@ -104,7 +104,7 @@ export default function CartScreen(props) {
                     <ul>
                         <li>
                             <h2>
-                                Total ({cartItems.reduce((a, c) => (a + c.quantity), 0)} items) : 
+                                Tổng ({cartItems.reduce((a, c) => (a + c.quantity), 0)} Sản phẩm) : 
                                  {cartItems.reduce((a, c) => ( NumberWithCommas(a + c.quantity * c.price *23000)), 0)} VNĐ
                             </h2>
                         </li>
@@ -115,7 +115,7 @@ export default function CartScreen(props) {
                                 onClick={checkoutHandler}
                                 className="primary block"
                                 disabled={cartItems.length === 0}>
-                                Proceed to checkout
+                                Thanh Toán
                             </button>
                         </li>
                     </ul>
