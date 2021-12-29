@@ -7,11 +7,11 @@ import MessageBox from '../components/MessageBox';
 export default function OrderHistoryScreen(props) {
   const orderMineList = useSelector((state) => state.orderMineList);
   const { loading, error, orders } = orderMineList;
-  const token = useSelector( state => state.token)
-  const auth = useSelector( state => state.auth)
+  const token = useSelector(state => state.token)
+  const auth = useSelector(state => state.auth)
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(listOrderMine( auth.user._id, token));
+    dispatch(listOrderMine(auth.user._id, token));
   }, [dispatch, auth.user._id, token]);
   return (
     <div>
@@ -47,12 +47,13 @@ export default function OrderHistoryScreen(props) {
                 <td>
                   <button
                     type="button"
-                    className="small"
+                    className="small editbtn"
                     onClick={() => {
                       props.history.push(`/order/${order._id}`);
                     }}
                   >
-                    Details
+                    <i className="fas fa-info margin-right"></i>
+                    Chi tiết
                   </button>
                 </td>
               </tr>
