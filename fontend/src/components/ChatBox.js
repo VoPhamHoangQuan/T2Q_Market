@@ -67,7 +67,7 @@ export default function ChatBox(props) {
       {!isOpen ? (
         <button className='radius-20' type="button" onClick={supportHandler}>
           
-          <i class="fas fa-headset fa-lg"></i>
+          <i className="fas fa-headset fa-lg"></i>
           
         </button>
       ) : (

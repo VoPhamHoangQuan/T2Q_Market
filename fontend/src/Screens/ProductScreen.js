@@ -84,7 +84,7 @@ export default function ProductScreen(props) {
                                             numReviews={product.numReviews}
                                         ></Rating>
                                     </li>
-                                    <li className="price"><strong>{NumberWithCommas( product.price * 23000)} VNĐ</strong></li>
+                                    <li className="price"><strong>{NumberWithCommas( product.price)} VNĐ</strong></li>
                                     <li>
                                         <strong>MÔ TẢ SẢN PHẨM:</strong>
                                         <p>{product.description}</p>
@@ -109,7 +109,7 @@ export default function ProductScreen(props) {
                                         <li>
                                             <div className="row">
                                                 <div><strong>Giá</strong></div>
-                                                <div className="price">{NumberWithCommas(product.price * 23000)} VNĐ</div>
+                                                <div className="price">{NumberWithCommas(product.price)} VNĐ</div>
                                             </div>
                                         </li>
                                         <li>

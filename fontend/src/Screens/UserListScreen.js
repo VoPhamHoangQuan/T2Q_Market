@@ -67,7 +67,7 @@ export default function UserListScreen(props) {
                                         className="small editbtn"
                                         onClick={() => props.history.push(`/user/${user._id}/edit`)}
                                     >
-                                        <i class="far fa-edit margin-right"></i>
+                                        <i className="far fa-edit margin-right"></i>
                                         Chỉnh sửa
                                     </button>
                                     <button
@@ -75,7 +75,7 @@ export default function UserListScreen(props) {
                                         className="small Delbtn"
                                         onClick={() => deleteHandler(user)}
                                     >
-                                        <i class="far fa-trash-alt margin-right"></i>
+                                        <i className="far fa-trash-alt margin-right"></i>
                                         Xoá tài khoản
                                     </button>
                                 </td>

@@ -59,7 +59,7 @@ export default function OrderListScreen(props) {
 
                 <Link to="/orderlist/deleted" >
                     <button type="button" className="primary del_btn bold_white">
-                        <i class="far fa-trash-alt margin-right"></i>
+                        <i className="far fa-trash-alt margin-right"></i>
                         Đơn hàng đã xoá
                     </button>
                 </Link>
@@ -102,7 +102,7 @@ export default function OrderListScreen(props) {
                                             props.history.push(`/order/${order._id}`);
                                         }}
                                     >
-                                        <i class="fas fa-info margin-right"></i>
+                                        <i className="fas fa-info margin-right"></i>
                                         Chi tiết
                                     </button>
                                     <button
@@ -110,7 +110,7 @@ export default function OrderListScreen(props) {
                                         className="small Delbtn"
                                         onClick={() => deleteHandler(order)}
                                     >
-                                        <i class="far fa-trash-alt margin-right"></i>
+                                        <i className="far fa-trash-alt margin-right"></i>
                                         Xoá đơn hàng
                                     </button>
                                 </td>

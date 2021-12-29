@@ -71,7 +71,7 @@ export default function ProductListScreen(props) {
                 <h1>DANH SÁCH SẢN PHẨM</h1>
                 {auth.user.isSeller && (
                     <button type="button" className="primary bold_white" onClick={createHandler}>
-                        <i class="far fa-plus-square margin-right"></i>
+                        <i className="far fa-plus-square margin-right"></i>
                         SẢN PHẨM MỚI
                     </button>
                 )}
@@ -116,7 +116,7 @@ export default function ProductListScreen(props) {
                                                 props.history.push(`/product/${product._id}/edit`)
                                             }
                                         >
-                                            <i class="far fa-edit margin-right"></i>
+                                            <i className="far fa-edit margin-right"></i>
                                             Chỉnh sửa
                                         </button>
                                         <button
@@ -124,7 +124,7 @@ export default function ProductListScreen(props) {
                                             className="small Delbtn"
                                             onClick={() => deleteHandler(product)}
                                         >
-                                            <i class="far fa-trash-alt margin-right"></i>
+                                            <i className="far fa-trash-alt margin-right"></i>
                                             Xoá sản phẩm
                                         </button>
                                     </td>

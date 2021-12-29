@@ -35,14 +35,14 @@ function ForgotPassword() {
     return (
         <div className='block-center'>
             <div className="fg_pass login_page login-card">
-                <i class="fab fa-get-pocket fa-5x card-body head-color-icon"></i>
+                <i className="fab fa-get-pocket fa-5x card-body head-color-icon"></i>
                 <h2 className='card-body'>LẤY LẠI MẬT KHẨU</h2>
 
                 <div className=" card-body row">
                     {err && showErrMsg(err)}
                     {success && showSuccessMsg(success)}
 
-                    <i class="fas fa-envelope fa-lg input-icon"></i>
+                    <i className="fas fa-envelope fa-lg input-icon"></i>
                     <input type="email" name="email" id="email" value={email}
                         onChange={handleChangeInput} placeholder="Nhập địa chỉ email" />
 

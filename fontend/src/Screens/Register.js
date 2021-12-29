@@ -54,7 +54,7 @@ function Register() {
     return (
         <div className='block-center'>
             <div className="login_page login-card">
-                <i class="fas fa-users fa-5x card-body head-color-icon"></i>
+                <i className="fas fa-users fa-5x card-body head-color-icon"></i>
                 <h2 className='card-body'>ĐĂNG KÝ TÀI KHOẢN</h2>
                 {err && showErrMsg(err)}
                 {success && showSuccessMsg(success)}
@@ -67,7 +67,7 @@ function Register() {
                     </div>
 
                     <div className='card-body row'>
-                        <i class="fas fa-envelope fa-lg input-icon"></i>
+                        <i className="fas fa-envelope fa-lg input-icon"></i>
                         <input type="text" placeholder="Nhập địa chỉ email" id="email"
                             value={email} name="email" onChange={handleChangeInput} />
                     </div>
@@ -79,7 +79,7 @@ function Register() {
                     </div>
 
                     <div className='card-body row'>
-                        <i class="fas fa-check-circle fa-lg input-icon"></i>
+                        <i className="fas fa-check-circle fa-lg input-icon"></i>
                         <input type="password" placeholder="Nhập lại mật khẩu" id="cf_password"
                             value={cf_password} name="cf_password" onChange={handleChangeInput} />
                     </div>

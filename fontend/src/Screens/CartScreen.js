@@ -78,7 +78,7 @@ export default function CartScreen(props) {
                                                         </select>
                                                     </div>
 
-                                                    <div className="min-10">{NumberWithCommas(item.price * 23000)} VNĐ</div>
+                                                    <div className="min-10">{NumberWithCommas(item.price)} VNĐ</div>
 
                                                     <div>
                                                         <button
@@ -105,7 +105,7 @@ export default function CartScreen(props) {
                         <li>
                             <h2>
                                 Tổng ({cartItems.reduce((a, c) => (a + c.quantity), 0)} Sản phẩm) : 
-                                 {cartItems.reduce((a, c) => ( NumberWithCommas(a + c.quantity * c.price *23000)), 0)} VNĐ
+                                 {cartItems.reduce((a, c) => ( NumberWithCommas(a + c.quantity * c.price)), 0)} VNĐ
                             </h2>
                         </li>
 

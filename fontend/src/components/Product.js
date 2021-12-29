@@ -16,7 +16,7 @@ export default function Product(props) {
                     <h2>{product.name}</h2>
                 </Link>
                 <Rating rating={product.rating} numReviews={product.numReviews}></Rating>
-                <div className="price">{NumberWithCommas(product.price * 23000)} VNĐ</div>
+                <div className="price">{NumberWithCommas(product.price)} VNĐ</div>
                 <div>
                     <Link to={`/seller/${product.seller._id}`}>
                         {product.seller.seller.name}

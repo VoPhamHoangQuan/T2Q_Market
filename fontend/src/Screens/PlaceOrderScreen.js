@@ -83,7 +83,7 @@ export default function PlaceOrderScreen(props) {
                                                     <div className="min-30">
                                                         <Link to={`/product/${item.product}`}>{item.name}</Link>
                                                     </div>
-                                                    <div>{item.quantity} x {NumberWithCommas(item.price*23000)} = {NumberWithCommas(item.quantity * item.price*23000)} VNĐ</div>
+                                                    <div>{item.quantity} x {NumberWithCommas(item.price)} = {NumberWithCommas(item.quantity * item.price)} VNĐ</div>
                                                 </div>
                                             </li>
                                         ))
@@ -102,25 +102,25 @@ export default function PlaceOrderScreen(props) {
                             <li>
                                 <div className="row">
                                     <div>Sản Phẩm</div>
-                                    <div>{NumberWithCommas(cart.itemsPrice*23000)} VNĐ</div>
+                                    <div>{NumberWithCommas(cart.itemsPrice)} VNĐ</div>
                                 </div>
                             </li>
                             <li>
                                 <div className="row">
                                     <div>Vận Chuyển</div>
-                                    <div>{NumberWithCommas(toPrice(cart.shippingPrice*23000))} VNĐ</div>
+                                    <div>{NumberWithCommas(toPrice(cart.shippingPrice))} VNĐ</div>
                                 </div>
                             </li>
                             <li>
                                 <div className="row">
                                     <div>Thuế</div>
-                                    <div>{NumberWithCommas(cart.taxPrice*23000)} VNĐ</div>
+                                    <div>{NumberWithCommas(cart.taxPrice)} VNĐ</div>
                                 </div>
                             </li>
                             <li>
                                 <div className="row">
                                     <div><strong>Tổng Chi Phí</strong></div>
-                                    <div><strong>{NumberWithCommas(toPrice(cart.totalPrice*23000))} VNĐ</strong></div>
+                                    <div><strong>{NumberWithCommas(toPrice(cart.totalPrice))} VNĐ</strong></div>
                                 </div>
                             </li>
                             <li>

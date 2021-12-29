@@ -87,7 +87,7 @@ function App() {
           {
             user.avatar ?
               (<img className="superSmall image-profile" src={user.avatar} alt={''} />)
-              : (<i class="fas fa-user-circle fa-2x" style={{ color: 'white' }}></i>)
+              : (<i className="fas fa-user-circle fa-2x" style={{ color: 'white' }}></i>)
           }
           <Link to="#">
             {user.name} <i className="fas fa-angle-down"></i>
@@ -213,7 +213,7 @@ function App() {
                 <button className='radius-20' type="button" onClick={supportHandler}>
 
                   {/* <img src="https://i.imgur.com/kun7baY.png" alt="Chat icon" width="30" height="30"></img> */}
-                  <i class="fas fa-headset fa-lg"></i>
+                  <i className="fas fa-headset fa-lg"></i>
                 </button>
               ) : (<Link to="/cart">
                 <i className="fas fa-shopping-cart fa-2x"></i>
